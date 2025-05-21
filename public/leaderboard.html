@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tarot Tableau</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn"><button onclick="location.href='index.html'"><img src="images/back.png" alt="Back" width="40" height="40"></button></div>
+  <h1 class="title">Tableau des Scores</h1>
+  <form id="todo-form">
+    <input type="text" id="todo-input" placeholder="Ajouter un joueur" required>
+    <button id="add">+</button>
+  </form>
+  <!--Table-->
+  <table id="myTable">
+    <colgroup>
+      <col style="width: 65%;">
+      <col style="width: 20%;">
+      <col style="width: 10%;">
+    </colgroup>
+    <thead>
+      <tr><th>Nom</th><th>Score</th><th>Supprimer</th></tr>
+    </thead>
+    <tbody>
+      <!-- rows will go here -->
+    </tbody>
+  </table>
+  <div class="crown" id="crownLead"><img src="images/crown.webp" alt="Crown" width="20" height="20"></div>
+  <script src="script.js"></script>
+  <script src="score.js"></script>
+</body>
+</html>

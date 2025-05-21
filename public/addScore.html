@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tarot Score</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="back-btn">
+    <button onclick="location.href='index.html'"><img src="images/back.png" alt="Back" width="40" height="40"></button>
+  </div>
+  <h1 class="title">Ajouter un Score</h1>
+
+  <form id="score-form">
+  <div id="container">
+    <div id="table">
+    <h2>Table</h2>
+    <div id="checkbox-list"></div>
+    </div>
+
+    <div id="table">
+    <h2>Preneur</h2>
+    <div id="radio-list"></div>
+    </div>
+
+    <div id="table">
+    <h2>Équipier</h2>
+    <div id="radio-list-2"></div>
+    </div>
+
+    <div id="nombre">
+    <div class="points"><h2>Points</h2>
+    <input type="number" id="points" name="points" placeholder="Points de l'attaque" required min="0" max="91"/></div>
+    </div>
+
+    <div id="contrat">
+    <h2>Contrat</h2>
+    <div class="pill-radio">
+    <input type="radio" id="contrat1" name="contrat" value="1"><label for="contrat1">Prise</label>
+    <input type="radio" id="contrat2" name="contrat" value="2"><label for="contrat2">Garde</label>
+    <input type="radio" id="contrat3" name="contrat" value="3"><label for="contrat3">Garde Sans</label>
+    <input type="radio" id="contrat4" name="contrat" value="4"><label for="contrat4">Garde Contre</label>
+    </div>
+    </div>
+
+    <div id="nombre">
+    <h2>Nombre de Bouts</h2>
+    <input type="number" id="bout" name="bout" placeholder="Nomber de bouts" required min="0" max="3"/></div>
+    </div>
+
+    <div id="prime">
+    <h2>Les Primes</h2>
+    <div class="pill-radio">
+      <div class="pill-row">
+        <input type="radio" id="prime1" name="prime1" value="1"><label for="prime1">Petit au bout (Attaque)</label>
+        <input type="radio" id="prime2" name="prime1" value="2"><label for="prime2">Petit au bout (Défense)</label>
+      </div>
+      <div class="pill-row">
+        <input type="radio" id="prime3" name="prime2" value="3"><label for="prime3">Simple Poignée</label>
+        <input type="radio" id="prime4" name="prime2" value="4"><label for="prime4">Deux Simple Poignée</label>
+        <input type="radio" id="prime5" name="prime2" value="5"><label for="prime5">Double Poignée</label>
+        <input type="radio" id="prime6" name="prime2" value="6"><label for="prime6">Triple Poignée</label>
+      </div>
+      <div class="pill-row">
+        <input type="radio" id="prime7" name="prime3" value="7"><label for="prime7">Chelem Annoncé</label>
+        <input type="radio" id="prime8" name="prime3" value="8"><label for="prime8">Chelem Non annoncé</label>
+        <input type="radio" id="prime9" name="prime3" value="9"><label for="prime9">Chelem Perdu</label>
+      </div>
+    </div>
+    </div>
+    <div id="result">
+      <h2>Résultats</h2>
+    <div id="scores"><p>Preneur : <span id="preneur"></span></p>
+    <p id="equipier-line">Équipier : <span id="equipier"></span></p>
+    <p>Défense : <span id="defense"></span></p></div>
+    <div class="submit-btn"><button id="submit" type="submit">Confirmer</button></div>
+    </div>
+  </div>
+    <br /><br />
+  </form>
+
+
+  <script src="updateRadio.js"></script>
+  <script src="script.js"></script>
+  <script src="score.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    // Attach form submit handler to prevent default and call submitForm()
+    document.getElementById('score-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitForm();
+    });
+  </script>
+
+  <script>
+    document.getElementById('submit').addEventListener('click', function () {
+      // Fire some confetti!
+      confetti({
+      particleCount: 350,
+      spread: 180,
+      startVelocity: -40,
+      origin: { y: -0.4 }
+    });
+    });
+  </script>
+
+</body>
+</html>

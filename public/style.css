@@ -1,0 +1,423 @@
+body {
+  background-color: rgb(159, 159, 159);
+  font-family: sans-serif;
+  margin: 0px auto;
+  text-align: left;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+#mainPage {
+  text-align: center;
+}
+
+#mainPage button {
+  background-color: rgb(70, 70, 70);
+  color: rgb(177, 177, 177);
+  font-size: 50px;
+  font-family: Lucida;
+  width: 30%;
+  height: 200px;
+  margin: 10px;
+  border-radius: 100px;
+  border-style: hidden;
+}
+
+#mainPage button:hover {
+  background-color: rgb(53, 53, 53);
+}
+
+#carte {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%; /* Optional: makes image responsive */
+}
+
+button.delete-btn {
+  margin-left: 5px;
+  background-color: rgb(70, 70, 70);
+  color: rgb(177, 177, 177);
+  font-size: 15px;
+  font-family: Lucida;
+  width: 90%;
+  height: 26px;
+  border-radius: 11px;
+  border-style: hidden;
+}
+
+table {
+  border-collapse: collapse;
+  width: 91%;
+  table-layout: fixed;
+  margin: 20px auto;
+  font-size: 20px;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #8b8c91}
+tr:nth-child(odd){background-color: #c4c4c4}
+
+th {
+  background-color: #6b5649;
+  color: white;
+}
+
+tr:hover {filter: brightness(90%);}
+
+.back-btn {
+  float: left;
+}
+
+.back-btn button {
+  position: absolute;
+  background-color: #6b564900;
+  border-style: hidden;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5em;
+}
+
+#todo-input {
+  width: 200px;
+  height: 25px;
+  padding: 8px 12px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+#todo-input::placeholder {
+  color: #888;
+}
+
+#add {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background-color: #fff;
+  border-style: hidden;
+  font-size: 30px;
+}
+
+#todo-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px auto;
+  width: fit-content; /* This makes sure the form only takes as much space as needed */
+}
+
+#add:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+/* addScore */
+
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+#table {
+  padding: 20px 40px 35px 40px;
+  float: left;
+  width: 23%;
+  height: 100%;
+  border-style: hidden;
+  background-color: #5c5c5c;
+  border-radius: 30px;
+  margin: 20px;
+}
+
+#nombre {
+  padding: 20px 40px 35px 40px;
+  float: left;
+  width: 17%;
+  height: 100%;
+  border-style: hidden;
+  background-color: #5c5c5c;
+  border-radius: 30px;
+  margin: 20px;
+}
+
+#contrat {
+  padding: 20px 40px 35px 40px;
+  float: left;
+  width: 36%;
+  height: 100%;
+  border-style: hidden;
+  background-color: #5c5c5c;
+  border-radius: 30px;
+  margin: 20px;
+}
+
+#prime {
+  padding: 20px 40px 35px 40px;
+  float: left;
+  width: 57%;
+  height: 100%;
+  border-style: hidden;
+  background-color: #5c5c5c;
+  border-radius: 30px;
+  margin: 20px;
+}
+
+#bout {
+  width: 130px;
+  height: 25px;
+  padding: 8px 12px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+#bout::placeholder {
+  color: #888;
+}
+
+#points {
+  width: 133px;
+  height: 25px;
+  padding: 8px 12px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+#points::placeholder {
+  color: #888;
+}
+
+.pill-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pill-checkboxes input[type="checkbox"] {
+  display: none; /* hide the checkbox */
+}
+
+.pill-checkboxes label {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 2px solid #888;
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.pill-checkboxes input[type="checkbox"]:checked + label {
+  background-color: #989898;
+  color: white;
+  border-color: #3b3b3b;
+}
+
+#checkbox-list {
+  margin-left: 3px;
+  font-size: large;
+}
+
+#checkbox-list input[type="checkbox"] {
+  display: none;
+}
+
+#checkbox-list label {
+  color: #282828;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#checkbox-list input[type="checkbox"]:checked + label {
+  color: rgb(28, 28, 28);
+  font-weight: bold;
+}
+
+#checkbox-list label:hover {
+  font-weight: bold;
+}
+
+/* Radio gaga */
+
+#radio-list {
+  font-size: large;
+}
+
+#radio-list input[type="radio"] {
+  display: none;
+}
+
+#radio-list label {
+  color: #282828;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#radio-list input[type="radio"]:checked + label {
+  color: rgb(28, 28, 28);
+  font-weight: bold;
+}
+
+#radio-list label:hover {
+  font-weight: bold;
+}
+
+/* Radio googoo */
+
+#radio-list-2 {
+  font-size: large;
+}
+
+#radio-list-2 input[type="radio"] {
+  display: none;
+}
+
+#radio-list-2 label {
+  color: #282828;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#radio-list-2 input[type="radio"]:checked + label {
+  color: rgb(28, 28, 28);
+  font-weight: bold;
+}
+
+#radio-list-2 label:hover {
+  font-weight: bold;
+}
+
+/* Contrat */
+
+.pill-radio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pill-radio input[type="checkbox"] {
+  display: none; /* hide the checkbox */
+}
+
+.pill-radio label {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 2px solid #888;
+  background-color: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.pill-radio input[type="checkbox"]:checked + label {
+  background-color: #989898;
+  color: white;
+  border-color: #3b3b3b;
+}
+
+#contrat {
+  font-size: medium;
+}
+
+#contrat input[type="radio"] {
+  display: none;
+}
+
+#contrat label {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pill-radio input[type="radio"]:checked + label {
+  background-color: #989898;
+  color: white;
+  border-color: #3b3b3b;
+}
+
+#prime input[type="radio"] {
+  display: none;
+}
+
+.pill-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+#result {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 30.5%;
+  height: 276px;
+  padding: 20px 40px 35px 40px;
+  background-color: #5c5c5c;
+  border-radius: 30px;
+  margin: 20px;
+  box-sizing: border-box;
+  color: black;
+}
+
+#result p {
+  margin: 5px 0;
+}
+
+.submit-btn {
+  margin-top: auto;
+  align-self: center; /* Align left inside the container */
+}
+
+.submit-btn button {
+  font-family: sans-serif;
+  font-size: large;
+  width: 140px;
+  height: 40px;
+  border-radius: 21px;
+  border-style: hidden;
+  cursor: pointer;
+  background-color: rgb(198, 212, 243);
+}
+
+.submit-btn button:hover {
+  background-color: rgb(170, 187, 223);
+}
+
+#scores {
+  font-size: large;
+  font-weight: bold;
+  color: rgb(211, 211, 211);
+}
+
+button {
+  cursor: pointer;
+}
+
+.crown {
+  position: fixed;
+  top: 201px;
+  left: 62px;
+  transform: rotate(-15deg);
+}
