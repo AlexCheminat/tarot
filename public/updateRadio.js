@@ -3,7 +3,15 @@ const radioContainer = document.getElementById('radio-list');
 const radioContainer2 = document.getElementById('radio-list-2');
 
 async function loadTasks() {
-  const res = await fetch('/api/todos');
+  const res = await fetch('https://labxsawjelsogtawxw.supabase.co/rest/v1/scores', {
+    method: 'GET',
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json'
+    }
+  });
+
   const todos = await res.json();
 
   checkboxContainer.innerHTML = '';
