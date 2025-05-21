@@ -3,7 +3,7 @@ const radioContainer = document.getElementById('radio-list');
 const radioContainer2 = document.getElementById('radio-list-2');
 
 async function loadTasks() {
-  const res = await fetch('https://labxsawjelsogtawxw.supabase.co/rest/v1/scores', {
+  const res = await fetch('https://lanbxsawcjelsngtawxw.supabase.co/rest/v1/scores', {
     method: 'GET',
     headers: {
       'apikey': SUPABASE_ANON_KEY,
