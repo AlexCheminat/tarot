@@ -97,7 +97,7 @@ function calculateScore(formData, isFinalSubmit) {
         }
     }
 
-    display(attPlayer, equipier, defPlayer);
+    display(formData, attPlayer, equipier, defPlayer);
 
     if (isFinalSubmit) {
         const allDefenders = formData.players.filter(name => name !== formData.preneur && name !== formData.equipier);
@@ -112,17 +112,24 @@ function calculateScore(formData, isFinalSubmit) {
     }
 }
 
-function display(attPlayer, equipier, defPlayer) {
-    document.querySelector('#preneur').textContent = attPlayer;
-    document.querySelector('#defense').textContent = defPlayer;
+function display(formData, attPlayer, equipier, defPlayer) {
+    if (window.location.pathname.includes("addScore.html")) {
+        const preneurSpan = document.querySelector('#preneur');
+        const equipierSpan = document.querySelector('#equipier');
+        const defenseSpan = document.querySelector('#defense');
+        const equipierLine = document.querySelector('#equipier-line');
 
-    const equipierLine = document.querySelector('#equipier-line');
+        if (preneurSpan && equipierSpan && defenseSpan && equipierLine) {
+            preneurSpan.textContent = `${formData.preneur}: ${attPlayer}`;
+            defenseSpan.textContent = defPlayer;
 
-    if (equipier === 0) {
-        equipierLine.style.display = 'none';
-    } else {
-        equipierLine.style.display = 'block';
-        document.querySelector('#equipier').textContent = equipier;
+            if (equipier === 0) {
+                equipierLine.style.display = 'none';
+            } else {
+                equipierLine.style.display = 'block';
+                equipierSpan.textContent = `${formData.equipier}: ${equipier}`;
+            }
+        }
     }
 }
 
@@ -135,8 +142,10 @@ function setupAutoUpdate() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    setupAutoUpdate();
-    previewScore(); // Initial display only
+    if (window.location.pathname.includes("addScore.html")) {
+        setupAutoUpdate();
+        previewScore();
+    }
 });
 
 // Export for form submission handler in HTML
