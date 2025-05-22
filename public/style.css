@@ -542,19 +542,19 @@ button {
     margin-left: 5%;
   }
 
-  .pill-checkboxes {
+  .pill-radio {
     color:blue;
   }
 
-  .pill-checkboxes input[type="checkbox"] {
+  .pill-radio input[type="checkbox"] {
     color:rgb(0, 255, 68);
   }
 
-  .pill-checkboxes label {
+  .pill-radio label {
     color:rgb(238, 255, 0);
   }
 
-  .pill-checkboxes input[type="checkbox"]:checked + label {
+  .pill-radio input[type="checkbox"]:checked + label {
     color:rgb(255, 0, 0);
   }
 }
