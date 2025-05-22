@@ -427,7 +427,7 @@ button {
 @media (max-width: 1000px) {
   body {
     text-align: center;
-    font-size: large;
+    font-size: 2.5em;
   }
 
   #table {
