@@ -465,6 +465,7 @@ button {
     padding: 20px 32px;
     border-radius: 26px;
     font-size: 48px;
+    margin-bottom: 10px;
   }
 
   #add {
