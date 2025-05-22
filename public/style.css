@@ -255,8 +255,10 @@ tr:hover {filter: brightness(90%);}
   font-weight: bold;
 }
 
-#checkbox-list label:hover {
-  font-weight: bold;
+@media (min-width: 1000px) {
+  #checkbox-list label:hover {
+    font-weight: bold;
+  }
 }
 
 /* Radio gaga */
@@ -433,23 +435,5 @@ button {
     height: 100%;
     margin: 5%;
     text-align: left;
-  }
-
-  button:hover {
-    background-color: inherit;
-    color: inherit;
-    cursor: default;
-  }
-
-  input[type="checkbox"]:hover {
-    background-color: inherit;
-    color: inherit;
-    cursor: default;
-  }
-
-  input[type="radio"]:hover {
-    background-color: inherit;
-    color: inherit;
-    cursor: default;
   }
 }
