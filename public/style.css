@@ -520,10 +520,7 @@ button {
 
   #nombre {
     width: 37.5%;
-  }
-
-  #boite-pts {
-    height: 200%;
+    flex: 1;
   }
 
   #contrat {
