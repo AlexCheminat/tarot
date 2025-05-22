@@ -520,7 +520,7 @@ button {
 
   #nombre {
     width: 37.5%;
-    height: 250px;
+    height: 300px;
   }
 
   #contrat {
@@ -537,14 +537,14 @@ button {
   }
 
   #bout {
-    width: 100%;
-    height: 100%;
+    width: 200px;
+    height: 50px;
   }
 
   #points {
     position: relative;
-    top: 30px;
-    width: 65px;
+    bottom: 30px;
+    width: 180px;
   }
 
   .pill-radio label {
