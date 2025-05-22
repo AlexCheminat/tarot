@@ -438,6 +438,10 @@ button {
   transform: rotate(-15deg);
 }
 
+#contrat h2 {
+  color:yellow;
+}
+
 @media (max-width: 1000px) {
   body {
     text-align: center;
@@ -525,7 +529,7 @@ button {
   }
 
   #contrat h2 {
-    color:yellow !important;
+    color:yellow;
   }
 
   #prime {
