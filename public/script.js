@@ -42,12 +42,10 @@ if (tableBody) {
       });
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
       const todos = await res.json();
-      const scores = getScores();
+      todos.sort((a, b) => (b.score || 0) - (a.score || 0));
 
-      todos.sort((a, b) => (scores[b.name] || 0) - (scores[a.name] || 0));
-
-      const topScore = scores[todos[0]?.name] || 0;
-      const secondScore = scores[todos[1]?.name] || 0;
+      const topScore = todos[0]?.score || 0;
+      const secondScore = todos[1]?.score || 0;
       const crownEl = document.getElementById('crownLead');
 
       if (crownEl) {
@@ -80,9 +78,6 @@ if (tableBody) {
           headers
         });
         if (!res.ok) throw new Error(`Delete failed: ${res.status}`);
-        const scores = getScores();
-        delete scores[todo.name];
-        setScores(scores);
         loadTodos();
       } catch (error) {
         console.error('Failed to delete score:', error);
@@ -116,16 +111,35 @@ if (form && input) {
   };
 }
 
-window.updatePlayerScore = function (playerName, deltaScore) {
+window.updatePlayerScore = async function (playerName, deltaScore) {
   console.log('Updating score for:', playerName, 'by', deltaScore);
-  const scores = getScores();
-  scores[playerName] = (scores[playerName] || 0) + deltaScore;
-  setScores(scores);
 
-  if (tableBody) {
-    const row = document.querySelector(`tr[data-name="${playerName}"]`);
-    if (typeof loadTodos === 'function') {
-      loadTodos();
-    }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?name=eq.${encodeURIComponent(playerName)}`, {
+    headers
+  });
+
+  if (!res.ok) {
+    console.error("Failed to fetch player:", res.status);
+    return;
+  }
+
+  const [player] = await res.json();
+  if (!player) {
+    console.error("Player not found:", playerName);
+    return;
+  }
+
+  const updatedScore = (player.score || 0) + deltaScore;
+
+  const updateRes = await fetch(`${SUPABASE_URL}/rest/v1/scores?id=eq.${player.id}`, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({ score: updatedScore })
+  });
+
+  if (!updateRes.ok) {
+    console.error("Failed to update score:", updateRes.status);
+  } else {
+    console.log(`${playerName} score updated to ${updatedScore}`);
   }
 };
