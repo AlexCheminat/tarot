@@ -454,8 +454,7 @@ button {
     height: 100%;
     margin-left: 5%;
     text-align: left;
-    display: flex;
-    justify-content: center;
+    display: block;
   }
 
   #mainPage button {
