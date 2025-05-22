@@ -427,7 +427,7 @@ button {
 @media (max-width: 1000px) {
   body {
     text-align: center;
-    font-size: 2.5em;
+    font-size: 2.0em;
   }
 
   #table {
@@ -435,5 +435,15 @@ button {
     height: 100%;
     margin: 5%;
     text-align: left;
+  }
+
+  #mainPage button {
+    font-size: 100px;
+    font-family: Lucida;
+    width: 80%;
+    height: 300px;
+    margin: 10px;
+    border-radius: 150px;
+    border-style: hidden;
   }
 }
