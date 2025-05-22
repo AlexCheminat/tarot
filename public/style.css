@@ -454,7 +454,6 @@ button {
   #table {
     width: 100%;
     height: 100%;
-    margin-left: 5%;
     text-align: left;
     display: block;
   }
@@ -521,7 +520,6 @@ button {
 
   #nombre {
     width: 40%;
-    margin-left: 5%;
   }
 
   #contrat {
@@ -539,12 +537,10 @@ button {
 
   #bout {
     width: 100%;
-    margin-left: 5%;
   }
 
   #points {
     width: 100%;
-    margin-left: 5%;
   }
 
   .pill-radio label {
