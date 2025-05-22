@@ -422,7 +422,7 @@ button {
   transform: rotate(-15deg);
 }
 
-@media (max-width: 2000px) {
+@media (max-width: 1000px) {
   body {
     background-color: rgb(245, 24, 24);
     font-family: sans-serif;
