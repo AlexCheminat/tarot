@@ -61,6 +61,18 @@ table {
   font-size: 20px;
 }
 
+.col-name {
+  width: 65%;
+}
+
+.col-score {
+  width: 20%;
+}
+
+.col-delete {
+  width: 10%;
+}
+
 th, td {
   text-align: left;
   padding: 8px;
@@ -461,6 +473,7 @@ button {
     border-radius: 23px;
     font-size: 2.2em;
     color: #1b1b1b;
+    padding-bottom: 20px;
   }
 
   table {
