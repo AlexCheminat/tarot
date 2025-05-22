@@ -541,4 +541,8 @@ button {
     width: 100%;
     margin-left: 5%;
   }
+
+  .pill-checkboxes label {
+    font-size: 10px;
+  }
 }
