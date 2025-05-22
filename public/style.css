@@ -358,9 +358,9 @@ tr:hover {filter: brightness(90%);}
   border-color: #3b3b3b;
 }
 
-#contrat {
+/* #contrat {
   font-size: medium;
-}
+} */
 
 #contrat input[type="radio"] {
   display: none;
