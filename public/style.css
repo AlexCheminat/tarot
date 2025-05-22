@@ -446,6 +446,7 @@ button {
   body {
     text-align: center;
     font-size: 2.0em;
+    align-items: center;
   }
 
   #table {
