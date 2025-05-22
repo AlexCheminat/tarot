@@ -525,13 +525,13 @@ button {
   #contrat {
     width: 100%;
     margin-left: 5%;
-    padding: 0px;
+    margin-right: 5%;
   }
 
   #prime {
     width: 100%;
     margin-left: 5%;
-    padding: 0px;
+    margin-right: 5%;
     float: left;
     height: 100%;
     border-radius: 30px;
