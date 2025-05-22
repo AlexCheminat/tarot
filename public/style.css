@@ -543,6 +543,7 @@ button {
   }
 
   .pill-checkboxes label {
-    font-size: 10px;
+    font-size: 5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 }
