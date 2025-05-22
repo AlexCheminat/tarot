@@ -543,8 +543,9 @@ button {
 
   #points {
     position: relative;
-    bottom: 30px;
-    width: 180px;
+    bottom: 250px;
+    width: 200px;
+    height: 50px;
   }
 
   .pill-radio label {
