@@ -542,8 +542,19 @@ button {
     margin-left: 5%;
   }
 
+  .pill-checkboxes {
+    color:blue;
+  }
+
+  .pill-checkboxes input[type="checkbox"] {
+    color:rgb(0, 255, 68);
+  }
+
   .pill-checkboxes label {
-    font-size: 5px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:rgb(238, 255, 0);
+  }
+
+  .pill-checkboxes input[type="checkbox"]:checked + label {
+    color:rgb(255, 0, 0);
   }
 }
