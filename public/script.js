@@ -54,7 +54,7 @@ if (tableBody) {
 
       tableBody.innerHTML = '';
       todos.forEach(todo => {
-        addRow(todo, scores[todo.name] || 0);
+        addRow(todo, todo.score || 0);
       });
     } catch (error) {
       console.error('Failed to load scores:', error);
