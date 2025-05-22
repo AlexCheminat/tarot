@@ -530,6 +530,11 @@ button {
   #prime {
     width: 100%;
     margin-left: 5%;
+    padding: 0px;
+    float: left;
+    height: 100%;
+    border-radius: 30px;
+    margin: 0px;
   }
 
   #bout {
