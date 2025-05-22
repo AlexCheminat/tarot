@@ -94,6 +94,7 @@ tr:hover {filter: brightness(90%);}
 
 .back-btn button {
   position: absolute;
+  left: 10px;
   background-color: #6b564900;
   border-style: hidden;
 }
@@ -512,5 +513,25 @@ button {
     height: 55px;
     border-radius: 23px;
     border-style: hidden;
+  }
+
+  #nombre {
+    width: 50%;
+  }
+
+  #contrat {
+    width: 100%;
+  }
+
+  #prime {
+    width: 100%;
+  }
+
+  #bout {
+    width: 100%;
+  }
+
+  #points {
+    width: 100%;
   }
 }
