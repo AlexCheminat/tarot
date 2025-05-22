@@ -522,7 +522,10 @@ button {
   #contrat {
     width: 100%;
     max-width: 87.5%;
-    color: yellow;
+  }
+
+  #contrat h2 {
+    font-size: 24px; /* Change this value as needed */
   }
 
   #prime {
