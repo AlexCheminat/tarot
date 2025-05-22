@@ -446,4 +446,13 @@ button {
     border-radius: 150px;
     border-style: hidden;
   }
+
+  #todo-input {
+    width: 600px;
+    height: 75px;
+    padding: 24px 36px;
+    border-style: hidden;
+    border-radius: 30px;
+    font-size: 52px;
+  }
 }
