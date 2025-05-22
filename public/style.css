@@ -537,6 +537,7 @@ button {
   }
 
   #bout {
+    position: relative;
     width: 200px;
     height: 50px;
     top: 80px;
