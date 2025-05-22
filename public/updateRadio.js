@@ -24,7 +24,7 @@ async function loadTasks() {
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.value = todo.text;
+    checkbox.value = todo.name;
     checkbox.id = `todo-${index}`; // unique ID
     checkbox.name = 'todo';
 
@@ -33,7 +33,7 @@ async function loadTasks() {
     });
 
     label.setAttribute('for', checkbox.id); // associate label with checkbox
-    label.textContent = todo.text;
+    label.textContent = todo.name;
 
     // Add checkbox and label separately
     checkboxContainer.appendChild(checkbox);
@@ -96,7 +96,7 @@ function addRadio(todo) {
   radio.value = todo.id;
 
   label.appendChild(radio);
-  label.appendChild(document.createTextNode(' ' + todo.text));
+  label.appendChild(document.createTextNode(' ' + todo.name));
   radioContainer.appendChild(label);
   radioContainer.appendChild(document.createElement('br'));
 }
