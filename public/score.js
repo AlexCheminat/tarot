@@ -120,14 +120,14 @@ function display(formData, attPlayer, equipier, defPlayer) {
         const equipierLine = document.querySelector('#equipier-line');
 
         if (preneurSpan && equipierSpan && defenseSpan && equipierLine) {
-            preneurSpan.textContent = `${formData.preneur}: ${attPlayer}`;
+            preneurSpan.textContent = attPlayer;
             defenseSpan.textContent = defPlayer;
 
             if (equipier === 0) {
                 equipierLine.style.display = 'none';
             } else {
                 equipierLine.style.display = 'block';
-                equipierSpan.textContent = `${formData.equipier}: ${equipier}`;
+                equipierSpan.textContent = equipier;
             }
         }
     }
