@@ -456,10 +456,14 @@ button {
   }
 
   #add {
-    width: 110px;
-    height: 110px;
-    border-radius: 26px;
-    font-size: 2.0em;
+    width: 105px;
+    height: 105px;
+    border-radius: 23px;
+    font-size: 2.2em;
     color: #1b1b1b;
+  }
+
+  table {
+    font-size: 50px;
   }
 }
