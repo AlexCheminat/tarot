@@ -448,11 +448,11 @@ button {
   }
 
   #todo-input {
-    width: 600px;
-    height: 75px;
-    padding: 24px 36px;
+    width: 500px;
+    height: 65px;
+    padding: 20px 32px;
     border-style: hidden;
-    border-radius: 30px;
-    font-size: 52px;
+    border-radius: 26px;
+    font-size: 48px;
   }
 }
