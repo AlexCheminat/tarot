@@ -525,7 +525,7 @@ button {
   }
 
   #contrat h2 {
-    color:yellow;
+    color:yellow !important;
   }
 
   #prime {
