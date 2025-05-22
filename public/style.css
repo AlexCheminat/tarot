@@ -543,7 +543,7 @@ button {
 
   #points {
     position: relative;
-    bottom: 250px;
+    top: 250px;
     width: 200px;
     height: 50px;
   }
