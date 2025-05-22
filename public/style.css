@@ -520,6 +520,9 @@ button {
 
   #nombre {
     width: 37.5%;
+  }
+
+  #boite-pts {
     flex: 1;
   }
 
