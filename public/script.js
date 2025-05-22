@@ -12,14 +12,6 @@ const tableBody = document.querySelector('#myTable tbody');
 const form = document.getElementById('todo-form');
 const input = document.getElementById('todo-input');
 
-function getScores() {
-  return JSON.parse(localStorage.getItem('playerScores') || '{}');
-}
-
-function setScores(scores) {
-  localStorage.setItem('playerScores', JSON.stringify(scores));
-}
-
 window.addEventListener('storage', (event) => {
   if (event.key === 'playerScores' && tableBody) {
     const scores = JSON.parse(event.newValue || '{}');
