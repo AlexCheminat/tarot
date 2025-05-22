@@ -451,8 +451,14 @@ button {
     width: 500px;
     height: 65px;
     padding: 20px 32px;
-    border-style: hidden;
     border-radius: 26px;
     font-size: 48px;
+  }
+
+  #add {
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    color: #1b1b1b;
   }
 }
