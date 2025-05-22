@@ -522,10 +522,6 @@ button {
     width: 37.5%;
   }
 
-  #boite-pts {
-    flex: 1;
-  }
-
   #contrat {
     width: 100%;
     max-width: 87.5%;
