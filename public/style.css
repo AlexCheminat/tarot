@@ -526,7 +526,7 @@ button {
 
   #contrat {
     width: 100%;
-    max-width: 500px;
+    max-width: 1000px;
   }
 
   #prime {
@@ -534,7 +534,7 @@ button {
     float: left;
     height: 100%;
     border-radius: 30px;
-    max-width: 100%;
+    max-width: 90%;
   }
 
   #bout {
