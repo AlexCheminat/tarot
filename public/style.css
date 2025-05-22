@@ -480,10 +480,12 @@ button {
   }
 
   .col-name {
+    padding-left: 5px;
     width: 43%;
   }
 
   .col-score {
+    padding-left: 5px;
     width: 27%;
   }
 
