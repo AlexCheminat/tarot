@@ -434,4 +434,22 @@ button {
     margin: 5%;
     text-align: left;
   }
+
+  button:hover {
+    background-color: inherit;
+    color: inherit;
+    cursor: default;
+  }
+
+  input[type="checkbox"]:hover {
+    background-color: inherit;
+    color: inherit;
+    cursor: default;
+  }
+
+  input[type="radio"]:hover {
+    background-color: inherit;
+    color: inherit;
+    cursor: default;
+  }
 }
