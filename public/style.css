@@ -480,7 +480,7 @@ button {
   }
 
   .col-name {
-    width: 43%;
+    width: 40%;
   }
 
   .col-score {
@@ -488,7 +488,7 @@ button {
   }
 
   .col-delete {
-    width: 30%;
+    width: 33%;
   }
 
   button.delete-btn {
