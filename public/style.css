@@ -587,5 +587,6 @@ button {
     height: 100%;
     text-align: left;
     display: block;
+    margin-right: 10px;
   }
 }
