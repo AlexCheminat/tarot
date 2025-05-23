@@ -438,7 +438,7 @@ button {
   transform: rotate(-15deg);
 }
 
-#score-entry {
+.score-entry {
   padding: 20px 40px 35px 40px;
   float: left;
   width: 23%;
