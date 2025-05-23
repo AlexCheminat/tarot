@@ -438,6 +438,17 @@ button {
   transform: rotate(-15deg);
 }
 
+#scoreArchive {
+  padding: 20px 40px 35px 40px;
+  float: left;
+  width: 23%;
+  height: 100%;
+  border-style: hidden;
+  background-color: #5c5c5c;
+  border-radius: 30px;
+  margin: 20px;
+}
+
 @media (max-width: 1000px) {
   body {
     text-align: center;
