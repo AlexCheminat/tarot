@@ -6,7 +6,7 @@ async function loadArchive() {
 const { data, error } = await supabase
     .from('score_archive')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('time_created', { ascending: false });
 
 if (error) {
     console.error("Error loading archive:", error);
