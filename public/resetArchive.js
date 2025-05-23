@@ -1,11 +1,8 @@
 const resetButton = document.getElementById('resetArchiveBtn');
 
 resetButton.addEventListener('click', async () => {
-  const confirmed = confirm("Are you sure you want to delete all archived scores?");
-  if (!confirmed) return;
-
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/score_archive`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/score_archive?true`, {
       method: 'DELETE',
       headers: {
         apikey: SUPABASE_ANON_KEY,
