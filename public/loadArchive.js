@@ -19,7 +19,7 @@ container.innerHTML = '';
 data.forEach(entry => {
     const div = document.createElement('div');
     div.className = 'score-entry';
-    div.textContent = `Preneur (${entry.preneur_nom}): ${entry.preneur_score}, Equipier (${entry.equipier_nom}): ${entry.equipier_score}, Defense (${entry.defense_nom}): ${entry.defense_score}\nPoints: ${entry.points}, Contrat: ${entry.contrat}, Bout: ${entry.bout}`;
+    div.textContent = `Preneur (${entry.preneur_nom}): ${entry.preneur_score}, Equipier (${entry.equipier_nom}): ${entry.equipier_score}\nDefense (${entry.defense_nom}): ${entry.defense_score}\nPoints: ${entry.points}, Contrat: ${entry.contrat}, Bout: ${entry.bout}`;
     container.appendChild(div);
 });
 }
