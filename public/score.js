@@ -114,14 +114,33 @@ function calculateScore(formData, isFinalSubmit) {
     }
 }
 
-function archiveScore(formData, attPlayer, equipier, defPlayer) {
+async function archiveScore(formData, attPlayer, equipier, defPlayer) {
+    const allDefenders = formData.players.filter(name => name !== formData.preneur && name !== formData.equipier);
+
+    const { data, error } = await supabase
+        .from('score_archive')
+        .insert([{
+            preneur: formData.preneur,
+            equipier: formData.equipier,
+            defenders: allDefenders,
+            att_score: attPlayer,
+            equipier_score: equipier,
+            def_score: defPlayer
+        }]);
+
+    if (error) {
+        console.error("Failed to archive score:", error);
+        return;
+    }
+
+    console.log("Score archived:", data);
+
+    // Optional: also append to DOM for immediate feedback
     const archive = document.getElementById("scoreArchive");
     const scoreDiv = document.createElement("div");
     scoreDiv.className = "score-entry";
-    scoreDiv.textContent = `Score: ${attPlayer}`;
-
+    scoreDiv.textContent = `${formData.preneur} scored ${attPlayer}, equipier: ${formData.equipier}, defenders: ${allDefenders.join(", ")}`;
     archive.appendChild(scoreDiv);
-    document.getElementById("scoreInput").value = ""; // clear input
 }
 
 function display(formData, attPlayer, equipier, defPlayer) {
