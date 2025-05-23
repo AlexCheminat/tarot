@@ -2,13 +2,13 @@ const resetButton = document.getElementById('resetArchiveBtn');
 
 resetButton.addEventListener('click', async () => {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/score_archive?select=*`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/score_archive?id=gt.0`, {
       method: 'DELETE',
       headers: {
         apikey: SUPABASE_ANON_KEY,
         Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
         'Content-Type': 'application/json',
-        Prefer: 'return=representation'  // Optional: returns deleted rows
+        Prefer: 'return=representation'  // Optional, shows deleted rows
       }
     });
 
@@ -17,7 +17,11 @@ resetButton.addEventListener('click', async () => {
     }
 
     alert("Score archive successfully reset!");
-    if (typeof loadArchive === 'function') loadArchive();
+
+    // Optional: reload the archive view if you have a function for that
+    if (typeof loadArchive === 'function') {
+      loadArchive();
+    }
 
   } catch (error) {
     console.error('Error resetting archive:', error);
