@@ -565,4 +565,8 @@ button {
     left: 62px;
     transform: rotate(-15deg);
   }
+
+  #checkbox-list {
+    font-size: 30px;
+  }
 }
