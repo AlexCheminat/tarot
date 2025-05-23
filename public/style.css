@@ -551,7 +551,7 @@ button {
   }
 
   .pill-radio label {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   #result {
@@ -567,6 +567,7 @@ button {
   }
 
   #checkbox-list {
-    font-size: 30px;
+    font-size: 35px;
+    margin-bottom: 5px;
   }
 }
