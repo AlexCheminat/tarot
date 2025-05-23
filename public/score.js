@@ -130,7 +130,6 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
             points: formData.points,
             contrat: formData.contrat,
             bout: formData.bout,
-            primes: JSON.parse(formData.primes),
         }]);
 
     if (error) {
