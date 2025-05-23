@@ -581,4 +581,11 @@ button {
     font-size: 35px;
     margin-bottom: 10px;
   }
+
+  .score-entry {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    display: block;
+  }
 }

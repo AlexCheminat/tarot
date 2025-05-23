@@ -2,7 +2,7 @@ const resetButton = document.getElementById('resetArchiveBtn');
 
 resetButton.addEventListener('click', async () => {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/score_archive?id=gt.0`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/score_archive?created_at=not.is.null`, {
       method: 'GET',
       headers: {
         apikey: SUPABASE_ANON_KEY,
