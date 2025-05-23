@@ -19,7 +19,7 @@ container.innerHTML = '';
 data.forEach(entry => {
     const div = document.createElement('div');
     div.className = 'score-entry';
-    div.textContent = `Preneur: ${entry.preneur}, Equipier: ${entry.equipier}, Score: ${entry.attPlayer}`;
+    div.textContent = `Preneur: ${preneur_score}, Equipier: ${equipier_score}, Defense: ${defense_score}, Points: ${points}, Contrat: ${contrat}, Bout: ${bout}, Primes: ${primes}`;
     container.appendChild(div);
 });
 }
