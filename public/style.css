@@ -588,4 +588,20 @@ button {
     text-align: left;
     display: block;
   }
+
+  #more {
+    width: 25%;
+    height: 100%;
+    font-size: 50px;
+    background-color: rgb(198, 212, 243);
+    color: rgb(36, 36, 36)
+  }
+
+  #reset {
+    width: 25%;
+    height: 100%;
+    font-size: 50px;
+    background-color: rgb(176, 121, 106);
+    color: rgb(36, 36, 36)
+  }
 }
