@@ -583,10 +583,9 @@ button {
   }
 
   .score-entry {
-    width: 100%;
+    width: 95%;
     height: 100%;
     text-align: left;
     display: block;
-    margin-right: 10px;
   }
 }

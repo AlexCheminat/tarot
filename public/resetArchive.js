@@ -1,31 +1,32 @@
-const inspectButton = document.getElementById('resetArchiveBtn'); // temporarily reusing your reset button
+const resetButton = document.getElementById('resetArchiveBtn');
 
-inspectButton.addEventListener('click', async () => {
+resetButton.addEventListener('click', async () => {
+  const confirmed = confirm("Are you sure you want to reset the archive? This will delete all saved scores.");
+  if (!confirmed) return;
+
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/score_archive?select=*`, {
-      method: 'GET',
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/score_archive?id=not.is.null`, {
+      method: 'DELETE',
       headers: {
         apikey: SUPABASE_ANON_KEY,
         Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
         'Content-Type': 'application/json',
+        Prefer: 'return=representation'  // Optional: returns deleted rows
       }
     });
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch archive: ${res.status}`);
+      throw new Error(`Failed to reset archive: ${res.status}`);
     }
 
-    const data = await res.json();
-    console.log("Archive data:", data);
+    alert("Score archive successfully reset!");
 
-    if (data.length === 0) {
-      alert("Archive is empty.");
-    } else {
-      alert(`Fetched ${data.length} rows. Check the console for structure.`);
+    if (typeof loadArchive === 'function') {
+      loadArchive();
     }
 
   } catch (error) {
-    console.error('Error fetching archive data:', error);
-    alert("Failed to fetch archive data.");
+    console.error('Error resetting archive:', error);
+    alert("Failed to reset archive.");
   }
 });
