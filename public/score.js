@@ -109,7 +109,19 @@ function calculateScore(formData, isFinalSubmit) {
         allDefenders.forEach(name => {
             window.updatePlayerScore(name, defPlayer);
         });
+
+        archiveScore(formData, attPlayer, equipier, defPlayer);
     }
+}
+
+function archiveScore(formData, attPlayer, equipier, defPlayer) {
+    const archive = document.getElementById("scoreArchive");
+    const scoreDiv = document.createElement("div");
+    scoreDiv.className = "score-entry";
+    scoreDiv.textContent = `Score: ${attPlayer}`;
+
+    archive.appendChild(scoreDiv);
+    document.getElementById("scoreInput").value = ""; // clear input
 }
 
 function display(formData, attPlayer, equipier, defPlayer) {
@@ -147,6 +159,5 @@ window.addEventListener('DOMContentLoaded', () => {
         previewScore();
     }
 });
-
 // Export for form submission handler in HTML
 window.submitForm = submitForm;
