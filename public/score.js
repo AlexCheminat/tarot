@@ -139,13 +139,6 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
     }
 
     console.log("Score archived:", data);
-
-    // Optional: also append to DOM for immediate feedback
-    const archive = document.getElementById("scoreArchive");
-    const scoreDiv = document.createElement("div");
-    scoreDiv.className = "score-entry";
-    scoreDiv.textContent = `${formData.preneur} scored ${attPlayer}, equipier: ${formData.equipier}, defenders: ${allDefenders.join(", ")}`;
-    archive.appendChild(scoreDiv);
 }
 
 function display(formData, attPlayer, equipier, defPlayer) {
