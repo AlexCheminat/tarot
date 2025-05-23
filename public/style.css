@@ -433,8 +433,8 @@ button {
 
 .crown {
   position: fixed;
-  top: 201px;
-  left: 62px;
+  top: 221px;
+  left: 72px;
   transform: rotate(-15deg);
 }
 
