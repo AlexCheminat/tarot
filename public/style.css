@@ -558,12 +558,11 @@ button {
     width: 100%;
     max-width: 87.5%;
     height: 280px;
-    display: block;
   }
 
   .crown {
     position: absolute;
-    top: 400px;
+    top: 450px;
     left: 62px;
     transform: rotate(-15deg);
   }

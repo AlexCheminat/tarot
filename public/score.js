@@ -120,12 +120,17 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
     const { data, error } = await supabase
         .from('score_archive')
         .insert([{
-            preneur: formData.preneur,
-            equipier: formData.equipier,
-            defenders: allDefenders,
-            att_score: attPlayer,
+            round_number: 1,
+            preneur_nom: formData.preneur,
+            preneur_score: attPlayer,
+            equipier_nom: formData.equipier,
             equipier_score: equipier,
-            def_score: defPlayer
+            defendense_nom: allDefenders,
+            defendense_score: defPlayer,
+            points: formData.points,
+            contrat: formData.contrat,
+            bout: formData.bout,
+            primes: formData.primes,
         }]);
 
     if (error) {
