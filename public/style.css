@@ -589,7 +589,7 @@ button {
     display: block;
   }
 
-  #more {
+  .more {
     width: 25%;
     height: 100%;
     font-size: 50px;
@@ -597,7 +597,7 @@ button {
     color: rgb(36, 36, 36)
   }
 
-  #reset {
+  .reset {
     width: 25%;
     height: 100%;
     font-size: 50px;
