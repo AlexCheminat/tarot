@@ -1,12 +1,72 @@
-let lastChecked = null;
+let preneur = null;
+let equipier = null;
+let contrat = null;
+let primeCheck1 = null;
+let primeCheck2 = null;
+let primeCheck3 = null;
+
+document.querySelectorAll('input[type="radio"][name="selected-task"]').forEach(radio => {
+  radio.addEventListener('click', function () {
+    if (preneur === this) {
+      this.checked = false;
+      preneur = null;
+    } else {
+      preneur = this;
+    }
+  });
+});
+
+document.querySelectorAll('input[type="radio"][name="selected-task2"]').forEach(radio => {
+  radio.addEventListener('click', function () {
+    if (equipier === this) {
+      this.checked = false;
+      equipier = null;
+    } else {
+      equipier = this;
+    }
+  });
+});
+
+document.querySelectorAll('input[type="radio"][name="contrat"]').forEach(radio => {
+  radio.addEventListener('click', function () {
+    if (contrat === this) {
+      this.checked = false;
+      contrat = null;
+    } else {
+      contrat = this;
+    }
+  });
+});
 
 document.querySelectorAll('input[type="radio"][name="prime1"]').forEach(radio => {
   radio.addEventListener('click', function () {
-    if (lastChecked === this) {
+    if (primeCheck1 === this) {
       this.checked = false;
-      lastChecked = null;
+      primeCheck1 = null;
     } else {
-      lastChecked = this;
+      primeCheck1 = this;
+    }
+  });
+});
+
+document.querySelectorAll('input[type="radio"][name="prime2"]').forEach(radio => {
+  radio.addEventListener('click', function () {
+    if (primeCheck2 === this) {
+      this.checked = false;
+      primeCheck2 = null;
+    } else {
+      primeCheck2 = this;
+    }
+  });
+});
+
+document.querySelectorAll('input[type="radio"][name="prime3"]').forEach(radio => {
+  radio.addEventListener('click', function () {
+    if (primeCheck3 === this) {
+      this.checked = false;
+      primeCheck3 = null;
+    } else {
+      primeCheck3 = this;
     }
   });
 });
