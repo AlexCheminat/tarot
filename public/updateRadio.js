@@ -1,3 +1,5 @@
+let preneur = null;
+let equipier = null;
 const checkboxContainer = document.getElementById('checkbox-list');
 const radioContainer = document.getElementById('radio-list');
 const radioContainer2 = document.getElementById('radio-list-2');
@@ -68,6 +70,15 @@ function updateRadios() {
     radioContainer.appendChild(label1);
     radioContainer.appendChild(document.createElement('br'));
 
+    radio1.addEventListener('click', function () {
+      if (preneur === this) {
+        this.checked = false;
+        preneur = null;
+      } else {
+        preneur = this;
+      }
+    });
+
     // Second radio group
     const radio2 = document.createElement('input');
     radio2.type = 'radio';
@@ -83,6 +94,15 @@ function updateRadios() {
     radioContainer2.appendChild(radio2);
     radioContainer2.appendChild(label2);
     radioContainer2.appendChild(document.createElement('br'));
+
+    radio2.addEventListener('click', function () {
+      if (equipier === this) {
+        this.checked = false;
+        equipier = null;
+      } else {
+        equipier = this;
+      }
+    });
   });
 }
 

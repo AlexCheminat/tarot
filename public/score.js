@@ -1,5 +1,3 @@
-let preneur = null;
-let equipier = null;
 let contrat = null;
 let primeCheck1 = null;
 let primeCheck2 = null;
