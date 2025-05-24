@@ -29,14 +29,6 @@ data.forEach(entry => {
         default: break;
     }
 
-    switch (entry.bout) {
-        case 1: contrat = 'Prise'; break;
-        case 2: contrat = 'Garde'; break;
-        case 3: contrat = 'Garde Sans'; break;
-        case 4: contrat = 'Garde Contre'; break;
-        default: break;
-    }
-
   div.innerHTML = `
     Preneur (${entry.preneur_nom}): ${entry.preneur_score}<br>
     Equipier (${entry.equipier_nom}): ${entry.equipier_score}<br>
