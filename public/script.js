@@ -46,8 +46,10 @@ if (tableBody) {
 
       tableBody.innerHTML = '';
 
+      const alone = todos[todos.length - 1]?.score < (todos[todos.length - 2]?.score || -9999);
+
       todos.forEach(todo => {
-        const isLast = todo.id === todos[todos.length - 1]?.id && todos[todos.length - 1]?.score < todos[todos.length - 2]?.score || -9999;
+        const isLast = todo.id === todos[todos.length - 1]?.id && alone;
         addRow(todo, todo.score || 0, isLast);
       });
     } catch (error) {

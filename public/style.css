@@ -436,6 +436,7 @@ button {
   top: 226px;
   left: 72px;
   transform: rotate(-15deg);
+  display: none;
 }
 
 .score-entry {
