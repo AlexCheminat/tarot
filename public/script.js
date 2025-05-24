@@ -66,8 +66,8 @@ if (tableBody) {
 
     tr.innerHTML = `
       <td>${nameCell}</td>
-      <td>${parties}</td>
       <td class="score-cell">${score}</td>
+      <td>${parties}</td>
       <td><button class="delete-btn">Supprimer</button></td>
     `;
 
