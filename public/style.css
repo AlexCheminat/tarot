@@ -62,10 +62,14 @@ table {
 }
 
 .col-name {
-  width: 65%;
+  width: 45%;
 }
 
 .col-score {
+  width: 20%;
+}
+
+.col-parties {
   width: 20%;
 }
 
@@ -504,11 +508,15 @@ button {
   }
 
   .col-name {
-    width: 40%;
+    width: 35%;
   }
 
   .col-score {
-    width: 27%;
+    width: 23%;
+  }
+
+  .col-parties {
+    width: 9%;
   }
 
   .col-delete {

@@ -50,14 +50,14 @@ if (tableBody) {
 
       todos.forEach(todo => {
         const isLast = todo.id === todos[todos.length - 1]?.id && alone;
-        addRow(todo, todo.score || 0, isLast);
+        addRow(todo, todo.score || 0, todo.parties, isLast);
       });
     } catch (error) {
       console.error('Failed to load scores:', error);
     }
   };
 
-  function addRow(todo, score, isLast = false) {
+  function addRow(todo, score, parties, isLast = false) {
     const tr = document.createElement('tr');
     tr.dataset.name = todo.name;
 
@@ -66,6 +66,7 @@ if (tableBody) {
 
     tr.innerHTML = `
       <td>${nameCell}</td>
+      <td>${parties}</td>
       <td class="score-cell">${score}</td>
       <td><button class="delete-btn">Supprimer</button></td>
     `;
