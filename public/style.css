@@ -31,6 +31,18 @@ li {
   border-style: hidden;
 }
 
+#shuffleBtn button {
+  background-color: rgb(70, 70, 70);
+  color: rgb(177, 177, 177);
+  font-size: 50px;
+  font-family: Lucida;
+  width: 30%;
+  height: 200px;
+  margin: 10px;
+  border-radius: 100px;
+  border-style: hidden;
+}
+
 #mainPage button:hover {
   background-color: rgb(53, 53, 53);
 }
@@ -480,6 +492,16 @@ button {
     border-style: hidden;
   }
 
+  #shuffleBtn button {
+    font-size: 100px;
+    font-family: Lucida;
+    width: 80%;
+    height: 300px;
+    margin: 32px;
+    border-radius: 150px;
+    border-style: hidden;
+  }
+
   .back-btn img {
     width: 100px;
     height: 100px;
@@ -643,9 +665,9 @@ button {
   }
 
   #chosen {
-    font-size: 60px;
+    font-size: 90px;
     font-weight: bold;
     color: rgb(48, 48, 48);
-    margin-top: 30px;
+    margin-top: 70px;
   }
 }
