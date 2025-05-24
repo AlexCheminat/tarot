@@ -641,4 +641,11 @@ button {
     border-style: hidden;
     margin-top: 30px;
   }
+
+  #chosen {
+    font-size: 60px;
+    font-weight: bold;
+    color: rgb(48, 48, 48);
+    margin-top: 30px;
+  }
 }
