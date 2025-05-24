@@ -281,6 +281,14 @@ tr:hover {filter: brightness(90%);}
   #checkbox-list label:hover {
     font-weight: bold;
   }
+
+  #radio-list label:hover {
+    font-weight: bold;
+  }
+
+  #radio-list2 label:hover {
+    font-weight: bold;
+  }
 }
 
 /* Radio gaga */
@@ -304,10 +312,6 @@ tr:hover {filter: brightness(90%);}
   font-weight: bold;
 }
 
-#radio-list label:hover {
-  font-weight: bold;
-}
-
 /* Radio googoo */
 
 #radio-list-2 {
@@ -326,10 +330,6 @@ tr:hover {filter: brightness(90%);}
 
 #radio-list-2 input[type="radio"]:checked + label {
   color: rgb(28, 28, 28);
-  font-weight: bold;
-}
-
-#radio-list-2 label:hover {
   font-weight: bold;
 }
 
