@@ -1,13 +1,13 @@
 const resetButton = document.getElementById('resetArchiveBtn');
 
 resetButton.addEventListener('click', async () => {
-  const confirmed = confirm("Are you sure you want to reset the archive? This will delete all saved scores.");
+  const confirmed = confirm("Voulez-vous vraiment réinitialiser l'archive ? Cela supprimera tous les scores enregistrés.");
   if (!confirmed) return;
 
-  const confirmed2 = confirm("Vous etes vraiment sure?");
+  const confirmed2 = confirm("Vous êtes vraiment sure ?");
   if (!confirmed2) return;
 
-  const confirmed3 = confirm("Derniere chance!");
+  const confirmed3 = confirm("Dernière chance !");
   if (!confirmed3) return;
 
   try {
