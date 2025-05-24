@@ -25,8 +25,6 @@ resetButton.addEventListener('click', async () => {
       throw new Error(`Failed to reset archive: ${res.status}`);
     }
 
-    alert("Score archive successfully reset!");
-
     if (typeof loadArchive === 'function') {
       loadArchive();
     }
