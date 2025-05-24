@@ -1,5 +1,5 @@
-const SUPABASE_URL = "https://lanbxsawcjelsngtawxw.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhbmJ4c2F3Y2plbHNuZ3Rhd3h3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4MTIzMjYsImV4cCI6MjA2MzM4ODMyNn0.OePJTwjh3sn42LDiHKGpXlLkIFvipHC507KaqOIEy3k";
+const SUPABASE_URL = "https://.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.OePJTwjh3sn42LDiHKGpXlLkIFvipHC507KaqOIEy3k";
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const headers = {
@@ -12,6 +12,7 @@ const tableBody = document.querySelector('#myTable tbody');
 const form = document.getElementById('todo-form');
 const input = document.getElementById('todo-input');
 
+// Sync from localStorage
 window.addEventListener('storage', (event) => {
   if (event.key === 'playerScores' && tableBody) {
     const scores = JSON.parse(event.newValue || '{}');
@@ -30,9 +31,7 @@ let loadTodos;
 if (tableBody) {
   loadTodos = async () => {
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*`, {
-        headers
-      });
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*`, { headers });
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
       const todos = await res.json();
       todos.sort((a, b) => (b.score || 0) - (a.score || 0));
@@ -46,20 +45,25 @@ if (tableBody) {
       }
 
       tableBody.innerHTML = '';
+
       todos.forEach(todo => {
-        addRow(todo, todo.score || 0);
+        const isLast = todo.id === todos[todos.length - 1]?.id && todos[todos.length - 1]?.score !== todos[todos.length - 2]?.score;
+        addRow(todo, todo.score || 0, isLast);
       });
     } catch (error) {
       console.error('Failed to load scores:', error);
     }
   };
 
-  function addRow(todo, score) {
+  function addRow(todo, score, isLast = false) {
     const tr = document.createElement('tr');
     tr.dataset.name = todo.name;
 
+    const imageTag = `<img src="/images/naim.png" alt="last place" style="width: 20px; vertical-align: middle; margin-left: 5px;">`;
+    const nameCell = isLast ? `${todo.name} ${imageTag}` : todo.name;
+
     tr.innerHTML = `
-      <td>${todo.name}</td>
+      <td>${nameCell}</td>
       <td class="score-cell">${score}</td>
       <td><button class="delete-btn">Supprimer</button></td>
     `;
@@ -80,6 +84,7 @@ if (tableBody) {
     tableBody.appendChild(tr);
   }
 
+  // Realtime Supabase listener
   supabase
     .channel('realtime:scores')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'scores' }, payload => {
@@ -88,8 +93,7 @@ if (tableBody) {
     })
     .subscribe();
 
-  // Load the initial table
-  loadTodos();
+  loadTodos(); // Initial load
 }
 
 if (form && input) {
@@ -116,9 +120,7 @@ if (form && input) {
 window.updatePlayerScore = async function (playerName, deltaScore) {
   console.log('Updating score for:', playerName, 'by', deltaScore);
 
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?name=eq.${encodeURIComponent(playerName)}`, {
-    headers
-  });
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?name=eq.${encodeURIComponent(playerName)}`, { headers });
 
   if (!res.ok) {
     console.error("Failed to fetch player:", res.status);
