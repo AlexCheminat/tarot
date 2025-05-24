@@ -1,3 +1,16 @@
+let lastChecked = null;
+
+document.querySelectorAll('input[type="radio"][name="prime1"]').forEach(radio => {
+  radio.addEventListener('click', function () {
+    if (lastChecked === this) {
+      this.checked = false;
+      lastChecked = null;
+    } else {
+      lastChecked = this;
+    }
+  });
+});
+
 function getFormData() {
     const selectedPlayers = Array.from(document.querySelectorAll('#checkbox-list input[type="checkbox"]:checked')).map(cb => cb.value);
     const preneur = document.querySelector('#radio-list input[type="radio"]:checked')?.value || null;
