@@ -19,11 +19,29 @@ container.innerHTML = '';
 data.forEach(entry => {
   const div = document.createElement('div');
   div.className = 'score-entry';
+
+  let contrat = '';
+    switch (entry.contrat) {
+        case 1: contrat = 'Prise'; break;
+        case 2: contrat = 'Garde'; break;
+        case 3: contrat = 'Garde Sans'; break;
+        case 4: contrat = 'Garde Contre'; break;
+        default: break;
+    }
+
+    switch (entry.bout) {
+        case 1: contrat = 'Prise'; break;
+        case 2: contrat = 'Garde'; break;
+        case 3: contrat = 'Garde Sans'; break;
+        case 4: contrat = 'Garde Contre'; break;
+        default: break;
+    }
+
   div.innerHTML = `
     Preneur (${entry.preneur_nom}): ${entry.preneur_score}<br>
     Equipier (${entry.equipier_nom}): ${entry.equipier_score}<br>
     Defense (${entry.defense_nom}): ${entry.defense_score}<br>
-    Points: ${entry.points}, Contrat: ${entry.contrat}, Bout: ${entry.bout}
+    Points: ${entry.points}, Contrat: ${contrat}, Bout: ${entry.bout}
   `;
   container.appendChild(div);
 });
