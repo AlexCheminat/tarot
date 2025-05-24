@@ -83,6 +83,8 @@ function calculateScore(formData, isFinalSubmit) {
         defPlayer = -score;
         if (formData.preneur === formData.equipier) {
             attPlayer = score * 4;
+        } else if (formData.equipier === null) {
+            attPlayer = score * 3;
         } else {
             attPlayer = score * 2;
             equipier = score;
@@ -91,6 +93,8 @@ function calculateScore(formData, isFinalSubmit) {
         defPlayer = score;
         if (formData.preneur === formData.equipier) {
             attPlayer = -score * 4;
+        } else if (formData.equipier === null) {
+            attPlayer = -score * 3;
         } else {
             attPlayer = -score * 2;
             equipier = -score;
@@ -140,7 +144,7 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
     console.log("Score archived:", data);
 }
 
-function display(formData, attPlayer, equipier, defPlayer) {
+function display(attPlayer, equipier, defPlayer) {
     if (window.location.pathname.includes("addScore.html")) {
         const preneurSpan = document.querySelector('#preneur');
         const equipierSpan = document.querySelector('#equipier');
