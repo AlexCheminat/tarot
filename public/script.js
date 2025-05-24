@@ -47,7 +47,7 @@ if (tableBody) {
       tableBody.innerHTML = '';
 
       todos.forEach(todo => {
-        const isLast = todo.id === todos[todos.length - 1]?.id && todos[todos.length - 1]?.score !== todos[todos.length - 2]?.score;
+        const isLast = todo.id === todos[todos.length - 1]?.id && todos[todos.length - 1]?.score < todos[todos.length - 2]?.score || -9999;
         addRow(todo, todo.score || 0, isLast);
       });
     } catch (error) {
@@ -59,7 +59,7 @@ if (tableBody) {
     const tr = document.createElement('tr');
     tr.dataset.name = todo.name;
 
-    const imageTag = `<img src="/images/naim.png" alt="last place" style="width: 20px; vertical-align: middle; margin-left: 5px;">`;
+    const imageTag = `<img src="/images/naim.png" alt="last place" style="width: 40; vertical-align: middle; margin-left: 5px;">`;
     const nameCell = isLast ? `${todo.name} ${imageTag}` : todo.name;
 
     tr.innerHTML = `
