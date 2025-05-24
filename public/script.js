@@ -59,7 +59,7 @@ if (tableBody) {
     const tr = document.createElement('tr');
     tr.dataset.name = todo.name;
 
-    const imageTag = `<img src="/images/naim.png" alt="last place" style="width: 40; vertical-align: middle; margin-left: 5px;">`;
+    const imageTag = `<img src="/images/naim.png" alt="last place" style="width: 40px; vertical-align: middle; margin-left: 5px;">`;
     const nameCell = isLast ? `${todo.name} ${imageTag}` : todo.name;
 
     tr.innerHTML = `
