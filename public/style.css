@@ -671,7 +671,7 @@ button {
     margin-top: 70px;
   }
 
-  #shufflePage button {
+  #shufflePage p {
     font-size: 90px;
     font-weight: bold;
     color: rgb(48, 48, 48);
