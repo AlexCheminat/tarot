@@ -101,7 +101,7 @@ function calculateScore(formData, isFinalSubmit) {
         }
     }
 
-    display(formData, attPlayer, equipier, defPlayer);
+    display(attPlayer, equipier, defPlayer);
 
     if (isFinalSubmit) {
         const allDefenders = formData.players.filter(name => name !== formData.preneur && name !== formData.equipier);
