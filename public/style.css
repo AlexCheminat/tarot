@@ -582,6 +582,16 @@ button {
     margin-bottom: 10px;
   }
 
+  #radio-list {
+    font-size: 35px;
+    margin-bottom: 15px;
+  }
+
+  #radio-list-2 {
+    font-size: 35px;
+    margin-bottom: 10px;
+  }
+
   .score-entry {
     width: 87.5%;
     height: 100%;
@@ -590,18 +600,22 @@ button {
   }
 
   #more {
-    width: 25%;
+    width: 30%;
     height: 100%;
     font-size: 50px;
     background-color: rgb(198, 212, 243);
-    color: rgb(36, 36, 36)
+    color: rgb(36, 36, 36);
+    border-radius: 30px;
+    border-style: hidden;
   }
 
   #resetArchiveBtn {
-    width: 25%;
+    width: 30%;
     height: 100%;
     font-size: 50px;
-    background-color: rgb(176, 121, 106);
-    color: rgb(36, 36, 36)
+    background-color: rgb(232, 149, 149);
+    color: rgb(36, 36, 36);
+    border-radius: 30px;
+    border-style: hidden;
   }
 }
