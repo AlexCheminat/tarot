@@ -31,7 +31,7 @@ li {
   border-style: hidden;
 }
 
-#shuffleBtn button {
+.shuffleBtn button {
   background-color: rgb(70, 70, 70);
   color: rgb(177, 177, 177);
   font-size: 50px;
@@ -492,7 +492,7 @@ button {
     border-style: hidden;
   }
 
-  #shuffleBtn button {
+  .shuffleBtn button {
     font-size: 100px;
     font-family: Lucida;
     width: 80%;
