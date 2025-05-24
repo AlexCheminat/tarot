@@ -508,7 +508,7 @@ button {
   }
 
   .col-name {
-    width: 29%;
+    width: 32%;
   }
 
   .col-score {
@@ -516,11 +516,11 @@ button {
   }
 
   .col-parties {
-    width: 18%;
+    width: 20%;
   }
 
   .col-delete {
-    width: 33%;
+    width: 28%;
   }
 
   button.delete-btn {
