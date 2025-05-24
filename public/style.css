@@ -618,4 +618,17 @@ button {
     border-radius: 30px;
     border-style: hidden;
   }
+
+  #scores {
+    font-size: 35px;
+  }
+
+  .submit-btn button {
+    font-family: sans-serif;
+    font-size: 40px;
+    width: 240px;
+    height: 70px;
+    border-radius: 35px;
+    border-style: hidden;
+  }
 }
