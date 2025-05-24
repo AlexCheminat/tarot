@@ -29,13 +29,22 @@ data.forEach(entry => {
         default: break;
     }
 
-  div.innerHTML = `
-    Preneur (${entry.preneur_nom}): ${entry.preneur_score}<br>
-    Equipier (${entry.equipier_nom}): ${entry.equipier_score}<br>
-    Defense (${entry.defense_nom}): ${entry.defense_score}<br>
-    Points: ${entry.points}, Contrat: ${contrat}, Bout: ${entry.bout}
-  `;
-  container.appendChild(div);
+    if (entry.equipier_nom === null) {
+        div.innerHTML = `
+            Preneur (${entry.preneur_nom}): ${entry.preneur_score}<br>
+            Defense (${entry.defense_nom}): ${entry.defense_score}<br>
+            Points: ${entry.points}, Contrat: ${contrat}, Bout: ${entry.bout}
+        `;
+    } else {
+        div.innerHTML = `
+          Preneur (${entry.preneur_nom}): ${entry.preneur_score}<br>
+          Equipier (${entry.equipier_nom}): ${entry.equipier_score}<br>
+          Defense (${entry.defense_nom}): ${entry.defense_score}<br>
+          Points: ${entry.points}, Contrat: ${contrat}, Bout: ${entry.bout}
+        `;
+    }
+
+    container.appendChild(div);
 });
 }
 
