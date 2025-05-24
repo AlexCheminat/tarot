@@ -137,11 +137,12 @@ window.updatePlayerScore = async function (playerName, deltaScore) {
   }
 
   const updatedScore = (player.score || 0) + deltaScore;
+  const updatedParties = (player.parties || 0) + 1;
 
   const updateRes = await fetch(`${SUPABASE_URL}/rest/v1/scores?id=eq.${player.id}`, {
     method: 'PATCH',
     headers,
-    body: JSON.stringify({ score: updatedScore })
+    body: JSON.stringify({ score: updatedScore, parties: updatedParties })
   });
 
   if (!updateRes.ok) {
