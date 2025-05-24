@@ -670,4 +670,11 @@ button {
     color: rgb(48, 48, 48);
     margin-top: 70px;
   }
+
+  #shufflePage button {
+    font-size: 90px;
+    font-weight: bold;
+    color: rgb(48, 48, 48);
+    margin-top: 100px;
+  }
 }

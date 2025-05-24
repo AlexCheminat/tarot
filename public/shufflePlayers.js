@@ -44,6 +44,10 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
     // Display the chosen names
     document.getElementById('chosen').textContent = chosen.join(', ');
+
+    const msg = document.createElement('p');
+    msg.textContent = "Good luck!!!";
+    document.body.appendChild(msg);
   } catch (error) {
     console.error('Failed to load scores:', error);
   }
