@@ -46,8 +46,7 @@ data.forEach(entry => {
     }
 
     button.addEventListener('click', () => {
-        const id = button.dataset.id;
-        console.log('Clicked archived score with ID:', id);
+        console.log(`Score: ${entry}`);
         // You can now fetch or use this ID to load/modify the score
     });
 
