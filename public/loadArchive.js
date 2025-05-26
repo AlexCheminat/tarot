@@ -44,7 +44,7 @@ data.forEach(entry => {
         `;
     }
 
-    container.appendChild(div);
+    container.appendChild(button);
 });
 }
 
