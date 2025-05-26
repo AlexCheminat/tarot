@@ -113,8 +113,6 @@
 
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-      loadTasks();
-
       const rawData = localStorage.getItem('selectedScore');
       if (!rawData) return;
 
@@ -136,16 +134,20 @@
         }
       }
 
-      if (Array.isArray(table)) {
-        table.forEach(name => {
-          console.log(name);
-          const checkbox = document.querySelector(`input[name="todo"][value="${name}"]`);
-          console.log(checkbox);
-          if (checkbox) {
-            checkbox.checked = true;
-          }
-        });
-      }
+      setTimeout(() => {
+        if (Array.isArray(table)) {
+          table.forEach(name => {
+            console.log(name);
+            const checkbox = document.querySelector(`input[name="todo"][value="${name}"]`);
+            console.log(checkbox);
+            if (checkbox) {
+              checkbox.checked = true;
+            }
+          });
+        }
+
+        updateRadios();
+      }, 300);
 
       document.querySelector('[name="preneur"]').value = entry.preneur_nom;
       document.querySelector('[name="equipier"]').value = entry.equipier_nom;
