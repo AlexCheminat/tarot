@@ -134,8 +134,16 @@
         }
       }
 
-      console.log("HELLO");
       console.log(table);
+
+      if (Array.isArray(entry.joueurs_selectionnes)) {
+        table.forEach(name => {
+          const checkbox = document.querySelector(`input[name="table"][value="${name}"]`);
+          if (checkbox) {
+            checkbox.checked = true;
+          }
+        });
+      }
 
       document.querySelector('[name="table"]').value = table;
       document.querySelector('[name="preneur"]').value = entry.preneur_nom;
