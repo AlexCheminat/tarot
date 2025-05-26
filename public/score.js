@@ -195,7 +195,6 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
     const { data, error } = await supabase
         .from('score_archive')
         .insert([{
-            round_number: 1,
             preneur_nom: formData.preneur,
             preneur_score: attPlayer,
             equipier_nom: formData.equipier,
