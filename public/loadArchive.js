@@ -30,13 +30,13 @@ data.forEach(entry => {
     }
 
     if (entry.equipier_nom === null) {
-        div.innerHTML = `
+        button.innerHTML = `
             Preneur (${entry.preneur_nom}): ${entry.preneur_score}<br>
             Defense (${entry.defense_nom}): ${entry.defense_score}<br>
             Points: ${entry.points}, Contrat: ${contrat}, Bout: ${entry.bout}
         `;
     } else {
-        div.innerHTML = `
+        button.innerHTML = `
           Preneur (${entry.preneur_nom}): ${entry.preneur_score}<br>
           Equipier (${entry.equipier_nom}): ${entry.equipier_score}<br>
           Defense (${entry.defense_nom}): ${entry.defense_score}<br>
