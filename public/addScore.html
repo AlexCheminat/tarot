@@ -123,13 +123,15 @@
         table.push(nom);
       }
 
-      for (prime of entry.primes) {
-        const primeRadio1 = document.querySelector(`[name="prime1"][value="${prime}"]`);
-        if (primeRadio1) primeRadio1.checked = true;
-        const primeRadio2 = document.querySelector(`[name="prime2"][value="${prime}"]`);
-        if (primeRadio2) primeRadio2.checked = true;
-        const primeRadio3 = document.querySelector(`[name="prime3"][value="${prime}"]`);
-        if (primeRadio3) primeRadio3.checked = true;
+      if (entry.primes !== null) {
+        for (prime of entry.primes) {
+          const primeRadio1 = document.querySelector(`[name="prime1"][value="${prime}"]`);
+          if (primeRadio1) primeRadio1.checked = true;
+          const primeRadio2 = document.querySelector(`[name="prime2"][value="${prime}"]`);
+          if (primeRadio2) primeRadio2.checked = true;
+          const primeRadio3 = document.querySelector(`[name="prime3"][value="${prime}"]`);
+          if (primeRadio3) primeRadio3.checked = true;
+        }
       }
 
       document.querySelector('[name="table"]').value = table;
