@@ -27,6 +27,7 @@ async function loadTasks() {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.value = todo.name;
+    console.log(todo.name);
     checkbox.id = `todo-${index}`; // unique ID
     checkbox.name = 'todo';
 
