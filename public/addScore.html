@@ -113,6 +113,8 @@
 
   <script>
     window.addEventListener('DOMContentLoaded', () => {
+      loadTasks();
+
       const rawData = localStorage.getItem('selectedScore');
       if (!rawData) return;
 
@@ -133,8 +135,6 @@
           if (primeRadio3) primeRadio3.checked = true;
         }
       }
-
-      loadTasks();
 
       if (Array.isArray(table)) {
         table.forEach(name => {
