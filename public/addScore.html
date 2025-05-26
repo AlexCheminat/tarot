@@ -136,7 +136,7 @@
 
       console.log(table);
 
-      if (Array.isArray(entry.joueurs_selectionnes)) {
+      if (Array.isArray(table)) {
         table.forEach(name => {
           console.log(name);
           const checkbox = document.querySelector(`input[name="table"][value="${name}"]`);
