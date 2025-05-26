@@ -111,5 +111,20 @@
     });
   </script>
 
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const rawData = localStorage.getItem('selectedScore');
+      if (!rawData) return;
+
+      const entry = JSON.parse(rawData);
+
+      document.querySelector('[name="points"]').value = entry.points;
+
+
+
+      // localStorage.removeItem('selectedScore');
+    });
+  </script>
+
 </body>
 </html>

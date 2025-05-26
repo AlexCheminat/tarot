@@ -46,8 +46,8 @@ data.forEach(entry => {
     }
 
     button.addEventListener('click', () => {
-        console.log(`Score: ${entry}`);
-        // You can now fetch or use this ID to load/modify the score
+        localStorage.setItem('selectedScore', JSON.stringify(entry));
+        window.location.href = "addScore.html";
     });
 
     container.appendChild(button);
