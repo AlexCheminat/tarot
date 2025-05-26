@@ -17,17 +17,17 @@
   <div id="container">
     <div id="table">
     <h2>Table</h2>
-    <div id="checkbox-list"></div>
+    <div id="checkbox-list" name="table"></div>
     </div>
 
     <div id="table">
     <h2>Preneur</h2>
-    <div id="radio-list"></div>
+    <div id="radio-list" name="preneur"></div>
     </div>
 
     <div id="table">
     <h2>Équipier</h2>
-    <div id="radio-list-2"></div>
+    <div id="radio-list-2" name="equipier"></div>
     </div>
 
     <div id="nombre">
@@ -118,7 +118,15 @@
 
       const entry = JSON.parse(rawData);
 
+      // document.querySelector('[name="table"]').value = entry.points;
+      document.querySelector('[name="preneur"]').value = entry.preneur_nom;
+      document.querySelector('[name="equipier"]').value = entry.equipier_nom;
       document.querySelector('[name="points"]').value = entry.points;
+      document.querySelector('[name="bout"]').value = entry.bout;
+      document.querySelector('[name="contrat"]').value = entry.contrat;
+      // document.querySelector('[name="prime1"]').value = entry.points;
+      // document.querySelector('[name="prime2"]').value = entry.points;
+      // document.querySelector('[name="prime3"]').value = entry.points;
 
 
 
