@@ -17,8 +17,8 @@ const container = document.getElementById("scoreArchive");
 container.innerHTML = '';
 
 data.forEach(entry => {
-  const div = document.createElement('div');
-  div.className = 'score-entry';
+  const button = document.createElement('button');
+  button.className = 'score-entry';
 
   let contrat = '';
     switch (entry.contrat) {
