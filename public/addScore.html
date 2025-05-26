@@ -118,17 +118,27 @@
 
       const entry = JSON.parse(rawData);
 
-      // document.querySelector('[name="table"]').value = entry.points;
+      let table = [entry.preneur_nom, entry.equipier_nom];
+      for (nom of entry.defense_noms) {
+        table.push(nom);
+      }
+
+      for (prime of entry.primes) {
+        const primeRadio1 = document.querySelector(`[name="prime1"][value="${prime}"]`);
+        if (primeRadio1) primeRadio1.checked = true;
+        const primeRadio2 = document.querySelector(`[name="prime2"][value="${prime}"]`);
+        if (primeRadio2) primeRadio2.checked = true;
+        const primeRadio3 = document.querySelector(`[name="prime3"][value="${prime}"]`);
+        if (primeRadio3) primeRadio3.checked = true;
+      }
+
+      document.querySelector('[name="table"]').value = table;
       document.querySelector('[name="preneur"]').value = entry.preneur_nom;
       document.querySelector('[name="equipier"]').value = entry.equipier_nom;
       document.querySelector('[name="points"]').value = entry.points;
       document.querySelector('[name="bout"]').value = entry.bout;
-      document.querySelector('[name="contrat"]').value = entry.contrat;
-      // document.querySelector('[name="prime1"]').value = entry.points;
-      // document.querySelector('[name="prime2"]').value = entry.points;
-      // document.querySelector('[name="prime3"]').value = entry.points;
-
-
+      const contratRadio = document.querySelector(`[name="contrat"][value="${entry.contrat}"]`);
+      if (contratRadio) contratRadio.checked = true;
 
       // localStorage.removeItem('selectedScore');
     });
