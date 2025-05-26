@@ -19,6 +19,7 @@ container.innerHTML = '';
 data.forEach(entry => {
   const button = document.createElement('button');
   button.className = 'score-entry';
+  button.dataset.id = entry.id;
 
   let contrat = '';
     switch (entry.contrat) {
@@ -43,6 +44,12 @@ data.forEach(entry => {
           Points: ${entry.points}, Contrat: ${contrat}, Bout: ${entry.bout}
         `;
     }
+
+    button.addEventListener('click', () => {
+        const id = button.dataset.id;
+        console.log('Clicked archived score with ID:', id);
+        // You can now fetch or use this ID to load/modify the score
+    });
 
     container.appendChild(button);
 });
