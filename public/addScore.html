@@ -139,7 +139,7 @@
       if (Array.isArray(table)) {
         table.forEach(name => {
           console.log(name);
-          const checkbox = document.querySelector(`input[name="table"][value="${name}"]`);
+          const checkbox = document.querySelector(`input[name="todo"][value="${name}"]`);
           console.log(checkbox);
           if (checkbox) {
             checkbox.checked = true;
@@ -147,7 +147,6 @@
         });
       }
 
-      document.querySelector('[name="table"]').value = table;
       document.querySelector('[name="preneur"]').value = entry.preneur_nom;
       document.querySelector('[name="equipier"]').value = entry.equipier_nom;
       document.querySelector('[name="points"]').value = entry.points;
