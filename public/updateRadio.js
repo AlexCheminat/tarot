@@ -104,6 +104,8 @@ function updateRadios() {
       }
     });
   });
+
+  previewScore();
 }
 
 function addRadio(todo) {
