@@ -204,6 +204,7 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
             points: formData.points,
             contrat: formData.contrat,
             bout: formData.bout,
+            primes: formData.primes,
         }]);
 
     if (error) {
