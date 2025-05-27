@@ -231,7 +231,6 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
     }
 
     localStorage.removeItem('selectedScore');
-    console.log("Score archived:", data);
 }
 
 function display(attPlayer, equipier, defPlayer) {
