@@ -103,8 +103,6 @@ function updateRadios() {
         equipier = this;
       }
     });
-
-    console.log(todoId);
   });
 }
 
