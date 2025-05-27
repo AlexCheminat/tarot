@@ -211,7 +211,7 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
         .eq('id', archiveId);
 
         console.log("You dont even come through here");
-        // removePrevScores();
+        removePrevScores();
         localStorage.removeItem('archiveId');
     } else {
       const { data, error } = await supabase
@@ -257,6 +257,8 @@ function display(attPlayer, equipier, defPlayer) {
 function removePrevScores() {
     const rawData = localStorage.getItem('selectedScore');
     const entry = JSON.parse(rawData);
+
+    console.log(entry);
 
     window.updatePlayerScore(entry.preneur_nom, -entry.preneur_score);
     if (entry.preneur_nom !== entry.equipier_nom) {
