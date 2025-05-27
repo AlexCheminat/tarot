@@ -148,9 +148,9 @@
 
         updateRadios();
 
-        const preneurRadio = document.querySelector(`[name="preneur"][value="${entry.preneur}"]`);
+        const preneurRadio = document.querySelector(`[name="selected-task"][value="${entry.preneur}"]`);
         if (preneurRadio) preneurRadio.checked = true;
-        const equipierRadio = document.querySelector(`[name="equipier"][value="${entry.equipier}"]`);
+        const equipierRadio = document.querySelector(`[name="selected-task2"][value="${entry.equipier}"]`);
         if (equipierRadio) equipierRadio.checked = true;
       }, 300);
 
