@@ -210,6 +210,7 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
         })
         .eq('id', archiveId);
 
+        removePrevScores();
         localStorage.removeItem('archiveId');
     } else {
       const { data, error } = await supabase
@@ -256,6 +257,19 @@ function display(attPlayer, equipier, defPlayer) {
             }
         }
     }
+}
+
+function removePrevScores() {
+    const rawData = localStorage.getItem('selectedScore');
+    const entry = JSON.parse(rawData);
+
+    window.updatePlayerScore(entry.preneur_nom, -entry.preneur_score);
+    if (entry.preneur_nom !== entry.equipier_nom) {
+        window.updatePlayerScore(entry.equipier_nom, -entry.equipier_score);
+    }
+    entry.defense_nom.forEach(name => {
+        window.updatePlayerScore(name, -entry.defense_score);
+    });
 }
 
 function setupAutoUpdate() {
