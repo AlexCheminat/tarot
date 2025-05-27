@@ -237,7 +237,7 @@ function display(attPlayer, equipier, defPlayer) {
 }
 
 function setupAutoUpdate() {
-    const inputs = document.querySelectorAll('#checkbox-list input, #radio-list input, #radio-list-2 input, input[name="contrat"], input[name^="prime"], #points, #bout');
+    const inputs = document.querySelectorAll('input[name="todo"], input[name="selected-task"], input[name="selected-task2"], input[name="contrat"], input[name^="prime"], #points, #bout');
     inputs.forEach(input => {
         input.addEventListener('input', previewScore);
         input.addEventListener('change', previewScore);
