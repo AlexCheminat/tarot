@@ -146,11 +146,11 @@
 
         updateRadios();
 
-        const preneurRadio = document.querySelector(`[name="selected-task"][value="${entry.preneur}"]`);
+        const preneurRadio = document.querySelector(`[name="selected-task"][value="${entry.preneur_nom}"]`);
         if (preneurRadio) preneurRadio.checked = true;
-        console.log(entry.equipier);
+        console.log(entry.equipier_nom);
         console.log(preneurRadio);
-        const equipierRadio = document.querySelector(`[name="selected-task2"][value="${entry.equipier}"]`);
+        const equipierRadio = document.querySelector(`[name="selected-task2"][value="${entry.equipier_nom}"]`);
         if (equipierRadio) equipierRadio.checked = true;
         console.log(equipierRadio);
       }, 600);
