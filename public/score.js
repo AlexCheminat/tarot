@@ -191,27 +191,47 @@ function calculateScore(formData, isFinalSubmit) {
 
 async function archiveScore(formData, attPlayer, equipier, defPlayer) {
     const allDefenders = formData.players.filter(name => name !== formData.preneur && name !== formData.equipier);
+    const archiveId = localStorage.getItem('archiveId');
 
-    const { data, error } = await supabase
+    if (archiveId) {
+      const { data, error } = await supabase
+        .from('score_archive')
+        .update({
+          preneur_nom: formData.preneur,
+          preneur_score: attPlayer,
+          equipier_nom: formData.equipier,
+          equipier_score: equipier,
+          defense_nom: allDefenders,
+          defense_score: defPlayer,
+          points: formData.points,
+          contrat: formData.contrat,
+          bout: formData.bout,
+          primes: formData.primes,
+        })
+        .eq('id', archiveId);
+
+        localStorage.removeItem('archiveId');
+    } else {
+      const { data, error } = await supabase
         .from('score_archive')
         .insert([{
-            preneur_nom: formData.preneur,
-            preneur_score: attPlayer,
-            equipier_nom: formData.equipier,
-            equipier_score: equipier,
-            defense_nom: allDefenders,
-            defense_score: defPlayer,
-            points: formData.points,
-            contrat: formData.contrat,
-            bout: formData.bout,
-            primes: formData.primes,
-        }]);
+          preneur_nom: formData.preneur,
+          preneur_score: attPlayer,
+          equipier_nom: formData.equipier,
+          equipier_score: equipier,
+          defense_nom: allDefenders,
+          defense_score: defPlayer,
+          points: formData.points,
+          contrat: formData.contrat,
+          bout: formData.bout,
+          primes: formData.primes,
+      }]);
+    }
 
     if (error) {
         console.error("Failed to archive score:", error);
         return;
     }
-
     console.log("Score archived:", data);
 }
 

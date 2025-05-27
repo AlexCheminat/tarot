@@ -114,6 +114,7 @@
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const rawData = localStorage.getItem('selectedScore');
+      localStorage.setItem('archiveId', entry.id);
       if (!rawData) return;
 
       const entry = JSON.parse(rawData);
