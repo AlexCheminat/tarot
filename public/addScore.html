@@ -154,10 +154,10 @@
         if (preneurRadio) preneurRadio.checked = true;
         const equipierRadio = document.querySelector(`[name="selected-task2"][value="${entry.equipier_nom}"]`);
         if (equipierRadio) equipierRadio.checked = true;
+        document.querySelector('[name="bout"]').value = entry.bout;
       }, 600);
 
       document.querySelector('[name="points"]').value = entry.points;
-      document.querySelector('[name="bout"]').value = entry.bout;
       const contratRadio = document.querySelector(`[name="contrat"][value="${entry.contrat}"]`);
       if (contratRadio) contratRadio.checked = true;
 
