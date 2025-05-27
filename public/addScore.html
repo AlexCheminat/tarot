@@ -105,9 +105,9 @@
       origin: { y: 0 }
     });
 
-    // setTimeout(() => {
-    //   location.reload();
-    // }, 2000);
+    setTimeout(() => {
+      location.reload();
+    }, 2000);
     });
   </script>
 
@@ -162,8 +162,6 @@
       document.querySelector('[name="bout"]').value = entry.bout;
       const contratRadio = document.querySelector(`[name="contrat"][value="${entry.contrat}"]`);
       if (contratRadio) contratRadio.checked = true;
-
-      localStorage.removeItem('selectedScore');
     });
   </script>
 
