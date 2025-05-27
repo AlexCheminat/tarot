@@ -231,11 +231,6 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
     }
 
     localStorage.removeItem('selectedScore');
-
-    if (error) {
-        console.error("Failed to archive score:", error);
-        return;
-    }
     console.log("Score archived:", data);
 }
 
