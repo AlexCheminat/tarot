@@ -114,10 +114,10 @@
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const rawData = localStorage.getItem('selectedScore');
-      localStorage.setItem('archiveId', entry.id);
       if (!rawData) return;
 
       const entry = JSON.parse(rawData);
+      localStorage.setItem('archiveId', entry.id);
 
       let table = [entry.preneur_nom, entry.equipier_nom];
       for (nom of entry.defense_nom) {
