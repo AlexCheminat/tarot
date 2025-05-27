@@ -77,6 +77,7 @@ function updateRadios() {
       } else {
         preneur = this;
       }
+      previewScore();
     });
 
     // Second radio group
@@ -102,10 +103,9 @@ function updateRadios() {
       } else {
         equipier = this;
       }
+      previewScore();
     });
   });
-
-  previewScore();
 }
 
 function addRadio(todo) {
