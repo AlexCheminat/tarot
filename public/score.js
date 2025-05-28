@@ -177,12 +177,12 @@ function calculateScore(formData, isFinalSubmit) {
     if (isFinalSubmit) {
         const allDefenders = formData.players.filter(name => name !== formData.preneur && name !== formData.equipier);
 
-        window.updatePlayerScore(formData.preneur, attPlayer);
+        window.updatePlayerScore(formData.preneur, attPlayer, false);
         if (formData.preneur !== formData.equipier) {
-            window.updatePlayerScore(formData.equipier, equipier);
+            window.updatePlayerScore(formData.equipier, equipier, false);
         }
         allDefenders.forEach(name => {
-            window.updatePlayerScore(name, defPlayer);
+            window.updatePlayerScore(name, defPlayer, false);
         });
 
         archiveScore(formData, attPlayer, equipier, defPlayer);
@@ -260,12 +260,12 @@ function removePrevScores() {
 
     console.log(entry);
 
-    window.updatePlayerScore(entry.preneur_nom, -entry.preneur_score);
+    window.updatePlayerScore(entry.preneur_nom, -entry.preneur_score, true);
     if (entry.preneur_nom !== entry.equipier_nom) {
-        window.updatePlayerScore(entry.equipier_nom, -entry.equipier_score);
+        window.updatePlayerScore(entry.equipier_nom, -entry.equipier_score, true);
     }
     entry.defense_nom.forEach(name => {
-        window.updatePlayerScore(name, -entry.defense_score);
+        window.updatePlayerScore(name, -entry.defense_score, true);
     });
 }
 

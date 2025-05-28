@@ -120,7 +120,7 @@ if (form && input) {
   };
 }
 
-window.updatePlayerScore = async function (playerName, deltaScore) {
+window.updatePlayerScore = async function (playerName, deltaScore, modified) {
   console.log('Updating score for:', playerName, 'by', deltaScore);
 
   const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?name=eq.${encodeURIComponent(playerName)}`, { headers });
@@ -137,7 +137,13 @@ window.updatePlayerScore = async function (playerName, deltaScore) {
   }
 
   const updatedScore = (player.score || 0) + deltaScore;
-  const updatedParties = (player.parties || 0) + 1;
+
+  if (modified) {
+    const updatedParties = (player.parties || 0) - 1;
+  } else {
+    const updatedParties = (player.parties || 0) + 1;
+  }
+
 
   const updateRes = await fetch(`${SUPABASE_URL}/rest/v1/scores?id=eq.${player.id}`, {
     method: 'PATCH',
