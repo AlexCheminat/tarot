@@ -679,9 +679,11 @@ button {
   }
 
   #notChosen {
+    position: absolute;
     font-size: 60px;
     font-weight: bold;
     color: rgb(48, 48, 48);
     display: block;
+    margin-top: 150px;
   }
 }
