@@ -42,7 +42,12 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
       }
     }
     // Others
-    const notChosen = todos.filter(player => (!chosen.includes(player.name)).name);
+    let notChosen = [];
+    todos.forEach(todo => {
+      if (!chosen.includes(todo.name)) {
+        notChosen.push(todo.name);
+      }
+    });
 
     // Display the chosen names
     document.getElementById('chosen').textContent = chosen.join(', ');
