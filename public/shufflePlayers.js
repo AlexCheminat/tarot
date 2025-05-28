@@ -42,11 +42,11 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
       }
     }
     // Others
-    const notChosen = todos.filter(player => !chosen.includes(player.name));
+    const notChosen = todos.filter(player => (!chosen.includes(player.name)).name);
 
     // Display the chosen names
     document.getElementById('chosen').textContent = chosen.join(', ');
-    document.getElementById('chosen').textContent = notChosen.name.join('; ');
+    document.getElementById('chosen').textContent = notChosen.join('; ');
 
     if (!document.getElementById('luckMsg')) {
         const msg = document.createElement('p');
