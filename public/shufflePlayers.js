@@ -51,15 +51,17 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
     // Display the chosen names
     document.getElementById('chosen').textContent = chosen.join(', ');
-    document.getElementById('notChosen').textContent = notChosen.join(', ');
 
     if (!document.getElementById('luckMsg')) {
-        const msg = document.createElement('p');
-        msg.id = 'luckMsg';
-        msg.textContent = "Bonne Chance !!!";
-        document.body.appendChild(msg);
+      const msg = document.createElement('p');
+      msg.id = 'luckMsg';
+      msg.textContent = "Bonne Chance !!!";
+      document.body.appendChild(msg);
     }
-  } catch (error) {
-    console.error('Failed to load scores:', error);
-  }
+
+    document.getElementById('notChosen').textContent = notChosen.join(', ');
+
+    } catch (error) {
+      console.error('Failed to load scores:', error);
+    }
 });

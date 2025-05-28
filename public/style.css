@@ -677,4 +677,11 @@ button {
     color: rgb(48, 48, 48);
     margin-top: 100px;
   }
+
+  #notChosen {
+    font-size: 60px;
+    font-weight: bold;
+    color: rgb(48, 48, 48);
+    margin-top: 150px;
+  }
 }
