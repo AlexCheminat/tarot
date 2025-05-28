@@ -685,5 +685,6 @@ button {
     font-weight: bold;
     color: rgb(48, 48, 48);
     display: block;
+    align-self: center;
   }
 }
