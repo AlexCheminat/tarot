@@ -679,13 +679,9 @@ button {
   }
 
   #notChosen {
-    position: fixed;
-    bottom: 20%;
     font-size: 60px;
     font-weight: bold;
     color: rgb(48, 48, 48);
     display: block;
-    align-self: center;
-    align-content: center;
   }
 }
