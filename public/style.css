@@ -672,10 +672,10 @@ button {
   }
 
   #notChosen {
-    font-size: 60px;
+    font-size: 90px;
     font-weight: bold;
     color: rgb(48, 48, 48);
-    margin-top: 150px;
+    margin-top: 100px;
   }
 
   #luckMsg {

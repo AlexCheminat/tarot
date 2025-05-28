@@ -50,7 +50,10 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     });
 
     // Display the chosen names
-    document.getElementById('chosen').textContent = 'Test' + chosen.join(', ');
+    document.getElementById('chosen').textContent = 'Table: ' + chosen.join(', ');
+
+    document.getElementById('notChosen').textContent = 'Spectateur: ' + notChosen.join(', ');
+
 
     if (!document.getElementById('luckMsg')) {
       const msg = document.createElement('p');
@@ -59,7 +62,6 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
       document.body.appendChild(msg);
     }
 
-    document.getElementById('notChosen').textContent = notChosen.join(', ');
 
     } catch (error) {
       console.error('Failed to load scores:', error);
