@@ -46,7 +46,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
     // Display the chosen names
     document.getElementById('chosen').textContent = chosen.join(', ');
-    document.getElementById('chosen').textContent = notChosen.join('; ');
+    document.getElementById('chosen').textContent = notChosen.name.join('; ');
 
     if (!document.getElementById('luckMsg')) {
         const msg = document.createElement('p');
