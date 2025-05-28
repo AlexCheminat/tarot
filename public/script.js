@@ -138,10 +138,11 @@ window.updatePlayerScore = async function (playerName, deltaScore, modified) {
 
   const updatedScore = (player.score || 0) + deltaScore;
 
+  let updatedParties;
   if (modified) {
-    const updatedParties = (player.parties || 0) - 1;
+    updatedParties = (player.parties || 0) - 1;
   } else {
-    const updatedParties = (player.parties || 0) + 1;
+    updatedParties = (player.parties || 0) + 1;
   }
 
 
