@@ -194,6 +194,7 @@ function get6(todos) {
 }
 
 function getRest(chosen, todos) {
+  console.log('Todos inside helper:', todos);
   let notChosen = [];
   todos.forEach(todo => {
     if (!chosen.includes(todo.name)) {
