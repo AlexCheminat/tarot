@@ -90,7 +90,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
             .from('groups')
             .insert([{
               group1: getNames(chosenPlayers),
-              group2: getNames(notChosen),
+              group2: getNames(notChosenPlayers),
             }]);
           console.log('Inserted groups');
         } else {
