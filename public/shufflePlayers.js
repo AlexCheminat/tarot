@@ -146,7 +146,7 @@ function get5(todos) {
   if (c > 4) {
     while (chosen.length < 5) {
       const rand = Math.floor(Math.random() * todos.length);
-      if (!chosen.includes(todos[rand].name) && todos[rand].parties === min) {
+      if (!chosen.includes(todos[rand]) && todos[rand].parties === min) {
         chosen.push(todos[rand]);
       }
     }
@@ -157,7 +157,7 @@ function get5(todos) {
 
     while (chosen.length < 5) {
       const rand = Math.floor(Math.random() * todos.length);
-      if (!chosen.includes(todos[rand].name) && todos[rand].parties === min + 1) {
+      if (!chosen.includes(todos[rand]) && todos[rand].parties === min + 1) {
         chosen.push(todos[rand]);
       }
     }
@@ -182,7 +182,7 @@ function get6(todos) {
   if (c > 5) {
     while (chosen.length < 6) {
       const rand = Math.floor(Math.random() * todos.length);
-      if (!chosen.includes(todos[rand].name) && todos[rand].parties === min) {
+      if (!chosen.includes(todos[rand]) && todos[rand].parties === min) {
         chosen.push(todos[rand]);
       }
     }
@@ -193,7 +193,7 @@ function get6(todos) {
 
     while (chosen.length < 6) {
       const rand = Math.floor(Math.random() * todos.length);
-      if (!chosen.includes(todos[rand].name) && todos[rand].parties === min + 1) {
+      if (!chosen.includes(todos[rand]) && todos[rand].parties === min + 1) {
         chosen.push(todos[rand]);
       }
     }
