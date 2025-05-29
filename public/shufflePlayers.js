@@ -81,8 +81,6 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           console.log('Error fetching groups:', error2);
         } else if (!data2 || data2.length === 0) {
           chosen = get6(todos);
-          console.log('chosen:', chosen);
-          console.log('todos:', todos);
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
             .from('groups')
@@ -99,6 +97,9 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         chosen1 = get5(chosen);
         chosen2 = get5(notChosen);
         notChosen = getRest2(todos, chosen, chosen2);
+        console.log('Group1:', chosen);
+        console.log('Group2:', chosen2);
+        console.log('Spectator:', notChosen);
         document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
         document.getElementById('chosen2').textContent = 'Group 2: ' + chosen2.join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
@@ -114,7 +115,6 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
       msg.textContent = "Bonne Chance !!!";
       document.body.appendChild(msg);
     }
-
 
     } catch (error) {
       console.error('Failed to load scores:', error);
@@ -194,7 +194,6 @@ function get6(todos) {
 }
 
 function getRest(chosen, todos) {
-  console.log('Todos inside helper:', todos);
   let notChosen = [];
   todos.forEach(todo => {
     if (!chosen.includes(todo.name)) {
