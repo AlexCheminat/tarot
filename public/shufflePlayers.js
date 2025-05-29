@@ -17,31 +17,31 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     const numPlayers = todos.length;
     switch (numPlayers) {
       case 6:
-        chosen = get5(todos);
+        chosen = getNames(get5(todos));
         notChosen = getRest(chosen, todos);
         document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
         document.getElementById('notChosen').textContent = 'Spectateur: ' + notChosen.join(', ');
         break;
       case 7:
-        chosen = get5(todos);
+        chosen = getNames(get5(todos));
         notChosen = getRest(chosen, todos);
         document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
         break;
       case 8:
-        chosen = get5(todos);
+        chosen = getNames(get5(todos));
         notChosen = getRest(chosen, todos);
         document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
         break;
       case 9:
-        chosen = get5(todos);
+        chosen = getNames(get5(todos));
         notChosen = getRest(chosen, todos);
         document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
         break;
       case 10:
-        chosen = get5(todos);
+        chosen = getNames(get5(todos));
         notChosen = getRest(chosen, todos);
         document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
         document.getElementById('notChosen').textContent = 'Group 2: ' + notChosen.join(', ');
@@ -52,7 +52,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         .select();
 
         if (error || data.length === 0) {
-          chosen = get5(todos);
+          chosen = getNames(get5(todos));
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
           .from('groups')
@@ -67,7 +67,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           });
         }
 
-        chosen2 = get5(notChosen);
+        chosen2 = getNames(get5(notChosen));
         notChosen = getRest2(todos, chosen, chosen2);
         document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
         document.getElementById('chosen2').textContent = 'Group 2: ' + chosen2.join(', ');
@@ -82,34 +82,34 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           console.log('Error fetching groups:', error2);
         } else if (!data2 || data2.length === 0) {
           console.log('No groups found, creating new group');
-          chosen = get6(todos);
-          console.log('Chosen players:', chosen);
-          notChosen = getRest(chosen, todos);
-          console.log('rest:', notChosen);
+          chosenPlayers = get6(todos);
+          console.log('Chosen players:', chosenPlayers);
+          notChosenPlayers = getRest(chosenPlayers, todos);
+          console.log('rest:', notChosenPlayers);
           const { data, error } = await supabase
             .from('groups')
             .insert([{
-              group1: chosen,
-              group2: notChosen,
+              group1: getNames(chosenPlayers),
+              group2: getNames(notChosen),
             }]);
           console.log('Inserted groups');
         } else {
           data2.forEach(group => {
-            chosen = group.group1;
-            notChosen = group.group2;
+            chosenPlayers = getPlayers(todos, group.group1);
+            notChosenPlayers = getPlayers(todos, group.group2);
           });
         }
-        chosen1 = get5(chosen);
-        console.log('Chosen1:', chosen1);
-        chosen2 = get5(notChosen);
-        console.log('Chosen2:', chosen2);
-        notChosen2 = getRest2(todos, chosen, chosen2);
+        chosen1Players = get5(chosenPlayers);
+        console.log('Chosen1:', chosen1Players);
+        chosen2Players = get5(notChosenPlayers);
+        console.log('Chosen2:', chosen2Players);
+        notChosen2 = getNames(getRest2(todos, chosen1Players, chosen2Players));
         console.log('Two others:', notChosen2);
-        console.log('Group1:', chosen);
-        console.log('Group2:', chosen2);
+        console.log('Group1:', getNames(chosen1Players));
+        console.log('Group2:', getNames(chosen2Players));
         console.log('Spectator:', notChosen2);
-        document.getElementById('chosen').textContent = 'Group 1: ' + chosen1.join(', ');
-        document.getElementById('chosen2').textContent = 'Group 2: ' + chosen2.join(', ');
+        document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen1Players).join(', ');
+        document.getElementById('chosen2').textContent = 'Group 2: ' + getNames(chosen2Players).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen2.join(', ');
         break;
       default:
@@ -130,12 +130,13 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 });
 
 function get5(todos) {
+  console.log('Entered get5 function');
   let min = todos[0].parties || 0;
   todos.forEach(todo => {
     if (todo.parties < min) min = todo.parties;
   });
 
-  if (min === 6) {
+  if (min === 5) {
     resetGroups();
   }
 
@@ -146,18 +147,18 @@ function get5(todos) {
     while (chosen.length < 5) {
       const rand = Math.floor(Math.random() * todos.length);
       if (!chosen.includes(todos[rand].name) && todos[rand].parties === min) {
-        chosen.push(todos[rand].name);
+        chosen.push(todos[rand]);
       }
     }
   } else {
     todos.forEach(todo => {
-      if (todo.parties === min) chosen.push(todo.name);
+      if (todo.parties === min) chosen.push(todo);
     });
 
     while (chosen.length < 5) {
       const rand = Math.floor(Math.random() * todos.length);
       if (!chosen.includes(todos[rand].name) && todos[rand].parties === min + 1) {
-        chosen.push(todos[rand].name);
+        chosen.push(todos[rand]);
       }
     }
   }
@@ -182,18 +183,18 @@ function get6(todos) {
     while (chosen.length < 6) {
       const rand = Math.floor(Math.random() * todos.length);
       if (!chosen.includes(todos[rand].name) && todos[rand].parties === min) {
-        chosen.push(todos[rand].name);
+        chosen.push(todos[rand]);
       }
     }
   } else {
     todos.forEach(todo => {
-      if (todo.parties === min) chosen.push(todo.name);
+      if (todo.parties === min) chosen.push(todo);
     });
 
     while (chosen.length < 6) {
       const rand = Math.floor(Math.random() * todos.length);
       if (!chosen.includes(todos[rand].name) && todos[rand].parties === min + 1) {
-        chosen.push(todos[rand].name);
+        chosen.push(todos[rand]);
       }
     }
   }
@@ -204,8 +205,8 @@ function get6(todos) {
 function getRest(chosen, todos) {
   let notChosen = [];
   todos.forEach(todo => {
-    if (!chosen.includes(todo.name)) {
-      notChosen.push(todo.name);
+    if (!chosen.includes(todo)) {
+      notChosen.push(todo);
     }
   });
   return notChosen;
@@ -214,11 +215,28 @@ function getRest(chosen, todos) {
 function getRest2(chosen, chosen2, todos) {
   let notChosen = [];
   todos.forEach(todo => {
-    if ((!chosen.includes(todo.name)) && (!chosen2.includes(todo.name))) {
-      notChosen.push(todo.name);
+    if ((!chosen.includes(todo)) && (!chosen2.includes(todo))) {
+      notChosen.push(todo);
     }
   });
   return notChosen;
+}
+
+function getNames(players) {
+  let names = [];
+  players.forEach(player => {
+    names.push(player.name);
+  });
+}
+
+function getPlayers(todos, names) {
+  let players = [];
+  todos.forEach(todo => {
+    if (names.includes(todo.name)) {
+      players.push(todo);
+    }
+  });
+  return players;
 }
 
 function resetGroups() {
