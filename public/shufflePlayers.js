@@ -86,12 +86,10 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           console.log('Chosen players:', chosenPlayers);
           notChosenPlayers = getRest(chosenPlayers, todos);
           console.log('rest:', notChosenPlayers);
-          const { data, error } = await supabase
-            .from('groups')
-            .insert([{
-              group1: getNames(chosenPlayers),
-              group2: getNames(notChosenPlayers),
-            }]);
+          data2.insert([{
+            group1: getNames(chosenPlayers),
+            group2: getNames(notChosenPlayers),
+          }]);
           console.log('Inserted groups');
         } else {
           data2.forEach(group => {
