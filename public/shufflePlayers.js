@@ -51,7 +51,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         .from('groups')
         .select();
 
-        if (data.length === 0) {
+        if (error || data.length === 0) {
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
@@ -78,7 +78,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         .from('groups')
         .select();
 
-        if (data2.length === 0) {
+        if (error2 || data2.length === 0) {
           chosen = get6(todos);
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
