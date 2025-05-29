@@ -229,6 +229,7 @@ function getNames(players) {
   players.forEach(player => {
     names.push(player.name);
   });
+  return names;
 }
 
 function getPlayers(todos, names) {
