@@ -92,6 +92,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
               group1: chosen,
               group2: notChosen,
             }]);
+          console.log('Inserted groups');
         } else {
           data2.forEach(group => {
             chosen = group.group1;
