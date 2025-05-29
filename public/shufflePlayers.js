@@ -74,6 +74,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('notChosen').textContent = 'Spectateur: ' + notChosen.join(', ');
         break;
       case 12:
+        console.log('Entered case 12');
         const { data2, error2 } = await supabase
         .from('groups')
         .select();
