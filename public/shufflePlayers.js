@@ -68,7 +68,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         }
 
         chosen2 = get5(notChosen);
-        notChosen = getRest(todos, chosen, chosen2);
+        notChosen = getRest2(todos, chosen, chosen2);
         document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
         document.getElementById('chosen2').textContent = 'Group 2: ' + chosen2.join(', ');
         document.getElementById('notChosen').textContent = 'Spectateur: ' + notChosen.join(', ');
@@ -98,7 +98,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         }
         chosen1 = get5(chosen);
         chosen2 = get5(notChosen);
-        notChosen = getRest(todos, chosen, chosen2);
+        notChosen = getRest2(todos, chosen, chosen2);
         document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
         document.getElementById('chosen2').textContent = 'Group 2: ' + chosen2.join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
@@ -204,7 +204,7 @@ function getRest(chosen, todos) {
   return notChosen;
 }
 
-function getRest(chosen, chosen2, todos) {
+function getRest2(chosen, chosen2, todos) {
   let notChosen = [];
   todos.forEach(todo => {
     if ((!chosen.includes(todo.name)) && (!chosen2.includes(todo.name))) {
