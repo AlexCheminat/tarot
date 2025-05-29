@@ -81,8 +81,11 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         if (error2) {
           console.log('Error fetching groups:', error2);
         } else if (!data2 || data2.length === 0) {
+          console.log('No groups found, creating new group');
           chosen = get6(todos);
+          console.log('Chosen players:', chosen);
           notChosen = getRest(chosen, todos);
+          console.log('rest:', notChosen);
           const { data, error } = await supabase
             .from('groups')
             .insert([{
@@ -96,14 +99,17 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           });
         }
         chosen1 = get5(chosen);
+        console.log('Chosen1:', chosen1);
         chosen2 = get5(notChosen);
-        notChosen = getRest2(todos, chosen, chosen2);
+        console.log('Chosen2:', chosen2);
+        notChosen2 = getRest2(todos, chosen, chosen2);
+        console.log('Two others:', notChosen2);
         console.log('Group1:', chosen);
         console.log('Group2:', chosen2);
-        console.log('Spectator:', notChosen);
-        document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
+        console.log('Spectator:', notChosen2);
+        document.getElementById('chosen').textContent = 'Group 1: ' + chosen1.join(', ');
         document.getElementById('chosen2').textContent = 'Group 2: ' + chosen2.join(', ');
-        document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen2.join(', ');
         break;
       default:
         alert('Nombre de joueurs non supporté. Veuillez utiliser 5 ou 6 joueurs.');
