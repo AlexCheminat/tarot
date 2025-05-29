@@ -79,18 +79,17 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         .select();
         if (error2) {
           console.log('Error fetching groups:', error2);
-        }
-        if (data2.length === 0) {
+        } else if (!data2 || data2.length === 0) {
           chosen = get6(todos);
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
-          .from('groups')
-          .insert([{
-            group1: chosen,
-            group2: notChosen,
-          }]);
+            .from('groups')
+            .insert([{
+              group1: chosen,
+              group2: notChosen,
+            }]);
         } else {
-          data.forEach(group => {
+          data2.forEach(group => {
             chosen = group.group1;
             notChosen = group.group2;
           });
