@@ -86,6 +86,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           console.log('Chosen players:', chosenPlayers);
           notChosenPlayers = getRest(chosenPlayers, todos);
           console.log('rest:', notChosenPlayers);
+          console.log('What im about to insert: ', getNames(chosenPlayers), getNames(notChosenPlayers));
           data2.insert([{
             group1: getNames(chosenPlayers),
             group2: getNames(notChosenPlayers),
@@ -211,9 +212,12 @@ function getRest(chosen, todos) {
 }
 
 function getRest2(chosen, chosen2, todos) {
+  console.log('Entered getRest2 function');
   let notChosen = [];
   todos.forEach(todo => {
+    console.log('Checking todo:', todo);
     if ((!chosen.includes(todo)) && (!chosen2.includes(todo))) {
+      console.log('PUSHING!!!');
       notChosen.push(todo);
     }
   });
