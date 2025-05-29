@@ -210,7 +210,6 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
         })
         .eq('id', archiveId);
 
-        console.log("You dont even come through here");
         removePrevScores();
         localStorage.removeItem('archiveId');
     } else {

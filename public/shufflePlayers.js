@@ -14,46 +14,96 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
     const todos = await res.json();
 
-    let min = todos[0].parties || 0;
-    todos.forEach(todo => {
-      if (todo.parties < min) min = todo.parties;
-    });
+    const numPlayers = todos.length;
+    switch (numPlayers) {
+      case 6:
+        chosen = get5(todos);
+        notChosen = getRest(chosen, todos);
+        document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateur: ' + notChosen.join(', ');
+        break;
+      case 7:
+        chosen = get5(todos);
+        notChosen = getRest(chosen, todos);
+        document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
+        break;
+      case 8:
+        chosen = get5(todos);
+        notChosen = getRest(chosen, todos);
+        document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
+        break;
+      case 9:
+        chosen = get5(todos);
+        notChosen = getRest(chosen, todos);
+        document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
+        break;
+      case 10:
+        chosen = get5(todos);
+        notChosen = getRest(chosen, todos);
+        document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
+        document.getElementById('notChosen').textContent = 'Group 2: ' + notChosen.join(', ');
+        break;
+      case 11:
+        const { data, error } = await supabase
+        .from('groups')
+        .select();
 
-    let c = todos.filter(todo => todo.parties === min).length;
-
-    let chosen = [];
-    if (c > 4) {
-      while (chosen.length < 5) {
-        const rand = Math.floor(Math.random() * todos.length);
-        if (!chosen.includes(todos[rand].name) && todos[rand].parties === min) {
-          chosen.push(todos[rand].name);
+        if (data.length === 0) {
+          chosen = get5(todos);
+          notChosen = getRest(chosen, todos);
+          const { data, error } = await supabase
+          .from('groups')
+          .insert([{
+            group1: chosen,
+            group2: notChosen,
+          }]);
+        } else {
+          data.forEach(group => {
+            chosen = group.group1;
+            notChosen = group.group2;
+          });
         }
-      }
-    } else {
-      todos.forEach(todo => {
-        if (todo.parties === min) chosen.push(todo.name);
-      });
 
-      while (chosen.length < 5) {
-        const rand = Math.floor(Math.random() * todos.length);
-        if (!chosen.includes(todos[rand].name) && todos[rand].parties === min + 1) {
-          chosen.push(todos[rand].name);
+        chosen2 = get5(notChosen);
+        notChosen = getRest(todos, chosen, chosen2);
+        document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
+        document.getElementById('chosen2').textContent = 'Group 2: ' + chosen2.join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateur: ' + notChosen.join(', ');
+        break;
+      case 12:
+        const { data2, error2 } = await supabase
+        .from('groups')
+        .select();
+
+        if (data2.length === 0) {
+          chosen = get6(todos);
+          notChosen = getRest(chosen, todos);
+          const { data, error } = await supabase
+          .from('groups')
+          .insert([{
+            group1: chosen,
+            group2: notChosen,
+          }]);
+        } else {
+          data.forEach(group => {
+            chosen = group.group1;
+            notChosen = group.group2;
+          });
         }
-      }
+        chosen1 = get5(chosen);
+        chosen2 = get5(notChosen);
+        notChosen = getRest(todos, chosen, chosen2);
+        document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
+        document.getElementById('chosen2').textContent = 'Group 2: ' + chosen2.join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
+        break;
+      default:
+        alert('Nombre de joueurs non supporté. Veuillez utiliser 5 ou 6 joueurs.');
+        return;
     }
-    // Others
-    let notChosen = [];
-    todos.forEach(todo => {
-      if (!chosen.includes(todo.name)) {
-        notChosen.push(todo.name);
-      }
-    });
-
-    // Display the chosen names
-    document.getElementById('chosen').textContent = 'Table: ' + chosen.join(', ');
-
-    document.getElementById('notChosen').textContent = 'Spectateur: ' + notChosen.join(', ');
-
 
     if (!document.getElementById('luckMsg')) {
       const msg = document.createElement('p');
@@ -67,3 +117,108 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
       console.error('Failed to load scores:', error);
     }
 });
+
+function get5(todos) {
+  let min = todos[0].parties || 0;
+  todos.forEach(todo => {
+    if (todo.parties < min) min = todo.parties;
+  });
+
+  if (min === 6) {
+    resetGroups();
+  }
+
+  let c = todos.filter(todo => todo.parties === min).length;
+
+  let chosen = [];
+  if (c > 4) {
+    while (chosen.length < 5) {
+      const rand = Math.floor(Math.random() * todos.length);
+      if (!chosen.includes(todos[rand].name) && todos[rand].parties === min) {
+        chosen.push(todos[rand].name);
+      }
+    }
+  } else {
+    todos.forEach(todo => {
+      if (todo.parties === min) chosen.push(todo.name);
+    });
+
+    while (chosen.length < 5) {
+      const rand = Math.floor(Math.random() * todos.length);
+      if (!chosen.includes(todos[rand].name) && todos[rand].parties === min + 1) {
+        chosen.push(todos[rand].name);
+      }
+    }
+  }
+
+  return chosen;
+}
+
+function get6(todos) {
+  let min = todos[0].parties || 0;
+  todos.forEach(todo => {
+    if (todo.parties < min) min = todo.parties;
+  });
+
+  if (min === 6) {
+    resetGroups();
+  }
+
+  let c = todos.filter(todo => todo.parties === min).length;
+
+  let chosen = [];
+  if (c > 5) {
+    while (chosen.length < 6) {
+      const rand = Math.floor(Math.random() * todos.length);
+      if (!chosen.includes(todos[rand].name) && todos[rand].parties === min) {
+        chosen.push(todos[rand].name);
+      }
+    }
+  } else {
+    todos.forEach(todo => {
+      if (todo.parties === min) chosen.push(todo.name);
+    });
+
+    while (chosen.length < 6) {
+      const rand = Math.floor(Math.random() * todos.length);
+      if (!chosen.includes(todos[rand].name) && todos[rand].parties === min + 1) {
+        chosen.push(todos[rand].name);
+      }
+    }
+  }
+
+  return chosen;
+}
+
+function getRest(chosen, todos) {
+  let notChosen = [];
+  todos.forEach(todo => {
+    if (!chosen.includes(todo.name)) {
+      notChosen.push(todo.name);
+    }
+  });
+  return notChosen;
+}
+
+function getRest(chosen, chosen2, todos) {
+  let notChosen = [];
+  todos.forEach(todo => {
+    if ((!chosen.includes(todo.name)) && (!chosen2.includes(todo.name))) {
+      notChosen.push(todo.name);
+    }
+  });
+  return notChosen;
+}
+
+function resetGroups() {
+  supabase
+    .from('groups')
+    .delete()
+    .then(({ data, error }) => {
+      if (error) {
+        console.error('Error resetting groups:', error);
+      } else {
+        console.log('Groups reset successfully');
+      }
+    });
+}
