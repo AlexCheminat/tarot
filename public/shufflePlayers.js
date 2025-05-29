@@ -81,6 +81,8 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           console.log('Error fetching groups:', error2);
         } else if (!data2 || data2.length === 0) {
           chosen = get6(todos);
+          console.log('chosen:', chosen);
+          console.log('todos:', todos);
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
             .from('groups')
