@@ -77,6 +77,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         const { data2, error2 } = await supabase
         .from('groups')
         .select();
+        console.log('How did we get here?');
         if (error2) {
           console.log('Error fetching groups:', error2);
         }
