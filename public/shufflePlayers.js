@@ -80,7 +80,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         .select();
         if (error2) {
           console.log('Error fetching groups:', error2);
-        } else if (!data2) {
+        } else if (data2.length === 0) {
           console.log('No groups found, creating new group');
           chosenPlayers = get6(todos);
           console.log('Chosen players:', chosenPlayers);
@@ -95,6 +95,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           }]);
           console.log('Inserted groups');
         } else {
+          console.log('Groups found, using existing groups');
           data2.forEach(group => {
             chosenPlayers = getPlayers(todos, group.group1);
             notChosenPlayers = getPlayers(todos, group.group2);
