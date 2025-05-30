@@ -57,7 +57,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           });
           const theChosenOne = get1(chosen);
           notChosen.push(theChosenOne);
-          chosen.remove(theChosenOne);
+          chosen.splice(array.indexOf(theChosenOne), 1);
           await supabase
           .from('groups')
           .insert([{
