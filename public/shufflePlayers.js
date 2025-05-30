@@ -200,6 +200,7 @@ function get5(todos) {
 }
 
 function get6(todos) {
+  let resetFlag = true;
   let min = todos[0].parties || 0;
   todos.forEach(todo => {
     if (todo.parties < min) min = todo.parties;
