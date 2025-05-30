@@ -48,8 +48,8 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
             group2: getNames(notChosen),
           }]);
           updateRounds(todos, notChosen);
-          document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
-          document.getElementById('notChosen').textContent = 'Group 2: ' + getNames(notChosen).join(', ');
+          document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
+          document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         } else {
           data.forEach(group => {
             chosen = getPlayers(todos, group.group1);
@@ -64,15 +64,15 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
             group1: getNames(notChosen),
             group2: getNames(chosen),
           }]);
-          document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
-          document.getElementById('notChosen').textContent = 'Group 2: ' + getNames(notChosen).join(', ');
+          document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
+          document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         }
         break;
       case 10:
         chosen = get5(todos);
         notChosen = getRest(chosen, todos);
-        document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
-        document.getElementById('notChosen').textContent = 'Group 2: ' + getNames(notChosen).join(', ');
+        document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
+        document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         break;
       case 11:
         console.log('Entered case 11');
@@ -99,8 +99,8 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         console.log('Chosen2:', chosen2);
         notChosen = getRest2(chosen, chosen2, todos);
         console.log('Not chosen:', notChosen);
-        document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
-        document.getElementById('chosen2').textContent = 'Group 2: ' + getNames(chosen2).join(', ');
+        document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
+        document.getElementById('chosen2').textContent = 'Table 2: ' + getNames(chosen2).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateur: ' + getNames(notChosen).join(', ');
         break;
       case 12:
@@ -139,8 +139,8 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         console.log('Group1:', getNames(chosen1Players));
         console.log('Group2:', getNames(chosen2Players));
         console.log('Spectator:', notChosen2);
-        document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen1Players).join(', ');
-        document.getElementById('chosen2').textContent = 'Group 2: ' + getNames(chosen2Players).join(', ');
+        document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen1Players).join(', ');
+        document.getElementById('chosen2').textContent = 'Table 2: ' + getNames(chosen2Players).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen2.join(', ');
         break;
       default:
@@ -289,13 +289,14 @@ function getPlayers(todos, names) {
 
 function resetGroups() {
   supabase
-    .from('groups')
-    .delete()
-    .then(({ data, error }) => {
-      if (error) {
-        console.error('Error resetting groups:', error);
-      } else {
-        console.log('Groups reset successfully');
-      }
-    });
+  .from('groups')
+  .delete()
+  .neq('group1', [])
+  .then(({ data, error }) => {
+    if (error) {
+      console.error('Error resetting groups:', error);
+    } else {
+      console.log('Groups reset successfully');
+    }
+  });
 }
