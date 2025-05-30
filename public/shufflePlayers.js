@@ -72,7 +72,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
         chosen2 = get5(notChosen);
         console.log('Chosen2:', chosen2);
-        notChosen = getRest2(todos, chosen, chosen2);
+        notChosen = getRest2(chosen, chosen2, todos);
         console.log('Not chosen:', notChosen);
         document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
         document.getElementById('chosen2').textContent = 'Group 2: ' + getNames(chosen2).join(', ');
