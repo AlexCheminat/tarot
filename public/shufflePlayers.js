@@ -50,27 +50,27 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('notChosen').textContent = 'Group 2: ' + notChosen.join(', ');
         break;
       case 11:
-        if (error || data.length === 0) {
-          chosen = getNames(get5(todos));
+        if (data.length === 0) {
+          chosen = get5(todos);
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
           .from('groups')
           .insert([{
-            group1: chosen,
-            group2: notChosen,
+            group1: getNames(chosen),
+            group2: getNames(notChosen),
           }]);
         } else {
           data.forEach(group => {
-            chosen = group.group1;
-            notChosen = group.group2;
+            chosen = getPlayers(group.group1);
+            notChosen = getPlayers(group.group2);
           });
         }
 
-        chosen2 = getNames(get5(notChosen));
+        chosen2 = get5(notChosen);
         notChosen = getRest2(todos, chosen, chosen2);
-        document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
-        document.getElementById('chosen2').textContent = 'Group 2: ' + chosen2.join(', ');
-        document.getElementById('notChosen').textContent = 'Spectateur: ' + notChosen.join(', ');
+        document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
+        document.getElementById('chosen2').textContent = 'Group 2: ' + getNames(chosen2).join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateur: ' + getNames(notChosen).join(', ');
         break;
       case 12:
         console.log('Entered case 12');
