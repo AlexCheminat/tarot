@@ -671,18 +671,25 @@ button {
     margin-top: 150px;
   }
 
+  #chosen2 {
+    font-size: 90px;
+    font-weight: bold;
+    color: rgb(48, 48, 48);
+    margin-top: 150px;
+  }
+
   #notChosen {
     font-size: 90px;
     font-weight: bold;
     color: rgb(48, 48, 48);
-    margin-top: 100px;
+    margin-top: 150px;
   }
 
   #luckMsg {
     font-size: 90px;
     font-weight: bold;
     color: rgb(48, 48, 48);
-    margin-top: 100px;
+    margin-top: 200px;
   }
 
 }
