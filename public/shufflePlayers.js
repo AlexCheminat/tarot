@@ -38,10 +38,35 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
         break;
       case 9:
-        chosen = get5(todos);
-        notChosen = getRest(chosen, todos);
-        document.getElementById('chosen').textContent = 'Joueurs: ' + getNames(chosen).join(', ');
-        document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
+        if (data.length === 0) {
+          chosen = get5(todos);
+          notChosen = getRest(chosen, todos);
+          const { data, error } = await supabase
+          .from('groups')
+          .insert([{
+            group1: getNames(chosen),
+            group2: getNames(notChosen),
+          }]);
+          updateRounds(todos, notChosen);
+          document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
+          document.getElementById('notChosen').textContent = 'Group 2: ' + getNames(notChosen).join(', ');
+        } else {
+          data.forEach(group => {
+            chosen = getPlayers(todos, group.group1);
+            notChosen = getPlayers(todos, group.group2);
+          });
+          const theChosenOne = get1(chosen);
+          notChosen.push(theChosenOne);
+          chosen.remove(theChosenOne);
+          const { data, error } = await supabase
+          .from('groups')
+          .insert([{
+            group1: getNames(notChosen),
+            group2: getNames(chosen),
+          }]);
+          document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
+          document.getElementById('notChosen').textContent = 'Group 2: ' + getNames(notChosen).join(', ');
+        }
         break;
       case 10:
         chosen = get5(todos);
@@ -206,6 +231,19 @@ function get6(todos) {
   }
 
   return chosen;
+}
+
+function get1(chosen) {
+  let max = chosen[0].roundOf4;
+  forEach(chosen => {
+    if (chosen.roundOf4 > max) max = chosen.roundOf4;
+  });
+
+  let rand = Math.floor(Math.random() * chosen.length);
+  while (chosen[rand].roundOf4 !== max) {
+    rand = Math.floor(Math.random() * chosen.length);
+  }
+  return chosen[rand];
 }
 
 function getRest(chosen, todos) {
