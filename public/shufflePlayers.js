@@ -78,6 +78,9 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         const { data2, error2 } = await supabase
         .from('groups')
         .select();
+        data2.forEach(group => {
+          console.log('Group found:', group);
+        });
         if (error2) {
           console.log('Error fetching groups:', error2);
         } else if (data2.length === 0) {
