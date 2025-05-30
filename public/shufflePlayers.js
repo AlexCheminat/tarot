@@ -87,7 +87,9 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           notChosenPlayers = getRest(chosenPlayers, todos);
           console.log('rest:', notChosenPlayers);
           console.log('What im about to insert: ', getNames(chosenPlayers), getNames(notChosenPlayers));
-          data2.insert([{
+          const insertResult = await supabase
+          .from('groups')
+          .insert([{
             group1: getNames(chosenPlayers),
             group2: getNames(notChosenPlayers),
           }]);
