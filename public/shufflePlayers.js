@@ -291,7 +291,7 @@ function resetGroups() {
   supabase
   .from('groups')
   .delete()
-  .neq('group1', [])
+  .eq('id', 1)
   .then(({ data, error }) => {
     if (error) {
       console.error('Error resetting groups:', error);
