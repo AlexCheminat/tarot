@@ -104,7 +104,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         console.log('Chosen1:', chosen1Players);
         chosen2Players = get5(notChosenPlayers);
         console.log('Chosen2:', chosen2Players);
-        notChosen2 = getNames(getRest2(todos, chosen1Players, chosen2Players));
+        notChosen2 = getNames(getRest2(chosen1Players, chosen2Players, todos));
         console.log('Two others:', notChosen2);
         console.log('Group1:', getNames(chosen1Players));
         console.log('Group2:', getNames(chosen2Players));
