@@ -58,7 +58,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           const theChosenOne = get1(chosen);
           notChosen.push(theChosenOne);
           chosen.remove(theChosenOne);
-          const { data, error } = await supabase
+          await supabase
           .from('groups')
           .insert([{
             group1: getNames(notChosen),
