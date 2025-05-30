@@ -80,7 +80,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         .select();
         if (error2) {
           console.log('Error fetching groups:', error2);
-        } else if (!data2 || data2.length === 0) {
+        } else if (!data2) {
           console.log('No groups found, creating new group');
           chosenPlayers = get6(todos);
           console.log('Chosen players:', chosenPlayers);
