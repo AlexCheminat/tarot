@@ -166,7 +166,9 @@ function get5(todos) {
   let resetFlag = true;
   todos.forEach(todo => {
     if (todo.parties < min) min = todo.parties;
-    if (todo.parties % 5 !== 0) resetFlag = false;
+    if (todo.parties % 5 !== 0) {
+      resetFlag = false;
+    }
   });
 
   if (resetFlag) {
@@ -204,7 +206,9 @@ function get6(todos) {
   let min = todos[0].parties || 0;
   todos.forEach(todo => {
     if (todo.parties < min) min = todo.parties;
-    if (todo.parties % 5 !== 0) resetFlag = false;
+    if (todo.parties % 5 !== 0) {
+      resetFlag = false;
+    }
   });
 
   if (resetFlag) {
