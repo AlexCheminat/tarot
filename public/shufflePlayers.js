@@ -13,6 +13,9 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*`, { headers });
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
     const todos = await res.json();
+    const { data, error } = await supabase
+        .from('groups')
+        .select();
 
     const numPlayers = todos.length;
     switch (numPlayers) {
@@ -47,10 +50,6 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('notChosen').textContent = 'Group 2: ' + notChosen.join(', ');
         break;
       case 11:
-        const { data, error } = await supabase
-        .from('groups')
-        .select();
-
         if (error || data.length === 0) {
           chosen = getNames(get5(todos));
           notChosen = getRest(chosen, todos);
@@ -75,15 +74,11 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         break;
       case 12:
         console.log('Entered case 12');
-        const { data2, error2 } = await supabase
-        .from('groups')
-        .select();
-        data2.forEach(group => {
-          console.log('Group found:', group);
-        });
-        if (error2) {
+        console.log('Groups:', data);
+        console.log('Error:', error);
+        if (error) {
           console.log('Error fetching groups:', error2);
-        } else if (data2.length === 0) {
+        } else if (data.length === 0) {
           console.log('No groups found, creating new group');
           chosenPlayers = get6(todos);
           console.log('Chosen players:', chosenPlayers);
@@ -99,7 +94,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           console.log('Inserted groups');
         } else {
           console.log('Groups found, using existing groups');
-          data2.forEach(group => {
+          data.forEach(group => {
             chosenPlayers = getPlayers(todos, group.group1);
             notChosenPlayers = getPlayers(todos, group.group2);
           });
