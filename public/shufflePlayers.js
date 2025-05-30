@@ -163,11 +163,13 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 function get5(todos) {
   console.log('Entered get5 function');
   let min = todos[0].parties || 0;
+  let resetFlag = true;
   todos.forEach(todo => {
     if (todo.parties < min) min = todo.parties;
+    if (todo.parties % 5 !== 0) resetFlag = false;
   });
 
-  if (min === 5) {
+  if (resetFlag) {
     resetGroups();
   }
 
@@ -201,12 +203,12 @@ function get6(todos) {
   let min = todos[0].parties || 0;
   todos.forEach(todo => {
     if (todo.parties < min) min = todo.parties;
+    if (todo.parties % 5 !== 0) resetFlag = false;
   });
 
-  if (min === 6) {
+  if (resetFlag) {
     resetGroups();
   }
-
   let c = todos.filter(todo => todo.parties === min).length;
 
   let chosen = [];
