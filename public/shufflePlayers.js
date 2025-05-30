@@ -235,8 +235,8 @@ function get6(todos) {
 
 function get1(chosen) {
   let max = chosen[0].roundOf4;
-  forEach(chosen => {
-    if (chosen.roundOf4 > max) max = chosen.roundOf4;
+  chosen.forEach(player => {
+    if (player.roundOf4 > max) max = player.roundOf4;
   });
 
   let rand = Math.floor(Math.random() * chosen.length);
