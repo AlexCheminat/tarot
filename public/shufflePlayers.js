@@ -50,15 +50,19 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('notChosen').textContent = 'Group 2: ' + notChosen.join(', ');
         break;
       case 11:
+        console.log('Entered case 11');
         if (data.length === 0) {
+          console.log('No groups found, creating new group');
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
+          console.log('Groups:', chosen, notChosen);
           const { data, error } = await supabase
           .from('groups')
           .insert([{
             group1: getNames(chosen),
             group2: getNames(notChosen),
           }]);
+          console.log('Inserted groups:');
         } else {
           data.forEach(group => {
             chosen = getPlayers(group.group1);
@@ -67,7 +71,9 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         }
 
         chosen2 = get5(notChosen);
+        console.log('Chosen2:', chosen2);
         notChosen = getRest2(todos, chosen, chosen2);
+        console.log('Not chosen:', notChosen);
         document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
         document.getElementById('chosen2').textContent = 'Group 2: ' + getNames(chosen2).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateur: ' + getNames(notChosen).join(', ');
