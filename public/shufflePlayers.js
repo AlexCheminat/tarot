@@ -20,34 +20,34 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     const numPlayers = todos.length;
     switch (numPlayers) {
       case 6:
-        chosen = getNames(get5(todos));
+        chosen = get5(todos);
         notChosen = getRest(chosen, todos);
-        document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
-        document.getElementById('notChosen').textContent = 'Spectateur: ' + notChosen.join(', ');
+        document.getElementById('chosen').textContent = 'Joueurs: ' + getNames(chosen).join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateur: ' + getNames(notChosen).join(', ');
         break;
       case 7:
-        chosen = getNames(get5(todos));
+        chosen = get5(todos);
         notChosen = getRest(chosen, todos);
-        document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
-        document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
+        document.getElementById('chosen').textContent = 'Joueurs: ' + getNames(chosen).join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
         break;
       case 8:
-        chosen = getNames(get5(todos));
+        chosen = get5(todos);
         notChosen = getRest(chosen, todos);
-        document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
-        document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
+        document.getElementById('chosen').textContent = 'Joueurs: ' + getNames(chosen).join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
         break;
       case 9:
-        chosen = getNames(get5(todos));
+        chosen = get5(todos);
         notChosen = getRest(chosen, todos);
-        document.getElementById('chosen').textContent = 'Joueurs: ' + chosen.join(', ');
-        document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen.join(', ');
+        document.getElementById('chosen').textContent = 'Joueurs: ' + getNames(chosen).join(', ');
+        document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
         break;
       case 10:
-        chosen = getNames(get5(todos));
+        chosen = get5(todos);
         notChosen = getRest(chosen, todos);
-        document.getElementById('chosen').textContent = 'Group 1: ' + chosen.join(', ');
-        document.getElementById('notChosen').textContent = 'Group 2: ' + notChosen.join(', ');
+        document.getElementById('chosen').textContent = 'Group 1: ' + getNames(chosen).join(', ');
+        document.getElementById('notChosen').textContent = 'Group 2: ' + getNames(notChosen).join(', ');
         break;
       case 11:
         console.log('Entered case 11');
