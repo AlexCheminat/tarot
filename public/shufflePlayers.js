@@ -65,8 +65,8 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           console.log('Inserted groups:');
         } else {
           data.forEach(group => {
-            chosen = getPlayers(group.group1);
-            notChosen = getPlayers(group.group2);
+            chosen = getPlayers(todos, group.group1);
+            notChosen = getPlayers(todos, group.group2);
           });
         }
 
