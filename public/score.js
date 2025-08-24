@@ -189,16 +189,6 @@ function calculateScore(formData, isFinalSubmit) {
     }
 }
 
-function logToPage(message) {
-  const el = document.createElement("div");
-  el.style.color = "red";
-  el.style.fontFamily = "monospace";
-  el.style.whiteSpace = "pre-wrap";
-  el.style.fontSize = "14px";
-  el.innerText = typeof message === "object" ? JSON.stringify(message, null, 2) : message;
-  document.body.appendChild(el);
-}
-
 async function archiveScore(formData, attPlayer, equipier, defPlayer) {
     const allDefenders = formData.players.filter(name => name !== formData.preneur && name !== formData.equipier);
     const archiveId = localStorage.getItem('archiveId');
@@ -220,13 +210,6 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
         })
         .eq('id', archiveId);
 
-        if (error) {
-          logToPage("Update error: " + error.message + archiveId);
-          logToPage(error);
-        } else {
-          logToPage("Update success: " + JSON.stringify(data) + archiveId);
-        }
-
         removePrevScores();
         localStorage.removeItem('archiveId');
     } else {
@@ -244,13 +227,6 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
           bout: formData.bout,
           primes: formData.primes,
       }]);
-
-      if (error) {
-        logToPage("Update error: " + error.message + archiveId);
-        logToPage(error);
-      } else {
-        logToPage("Update success: " + JSON.stringify(data) + archiveId);
-      }
     }
 
     localStorage.removeItem('selectedScore');
