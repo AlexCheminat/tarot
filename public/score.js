@@ -201,35 +201,35 @@ function logToPage(message) {
 
 async function archiveScore(formData, attPlayer, equipier, defPlayer) {
     const allDefenders = formData.players.filter(name => name !== formData.preneur && name !== formData.equipier);
-    const archiveId = localStorage.getItem('archiveId');
+    // const archiveId = localStorage.getItem('archiveId');
 
-    if (archiveId) {
-      const { data, error } = await supabase
-        .from('score_archive')
-        .update({
-          preneur_nom: formData.preneur,
-          preneur_score: attPlayer,
-          equipier_nom: formData.equipier,
-          equipier_score: equipier,
-          defense_nom: allDefenders,
-          defense_score: defPlayer,
-          points: formData.points,
-          contrat: formData.contrat,
-          bout: formData.bout,
-          primes: formData.primes,
-        })
-        .eq('id', archiveId);
+    // if (archiveId) {
+    //   const { data, error } = await supabase
+    //     .from('score_archive')
+    //     .update({
+    //       preneur_nom: formData.preneur,
+    //       preneur_score: attPlayer,
+    //       equipier_nom: formData.equipier,
+    //       equipier_score: equipier,
+    //       defense_nom: allDefenders,
+    //       defense_score: defPlayer,
+    //       points: formData.points,
+    //       contrat: formData.contrat,
+    //       bout: formData.bout,
+    //       primes: formData.primes,
+    //     })
+    //     .eq('id', archiveId);
 
-        if (error) {
-          logToPage("Update error: " + error.message);
-          logToPage(error);
-        } else {
-          logToPage("Update success: " + JSON.stringify(data));
-        }
+    //     if (error) {
+    //       logToPage("Update error: " + error.message);
+    //       logToPage(error);
+    //     } else {
+    //       logToPage("Update success: " + JSON.stringify(data));
+    //     }
 
-        removePrevScores();
-        localStorage.removeItem('archiveId');
-    } else {
+    //     removePrevScores();
+    //     localStorage.removeItem('archiveId');
+    // } else {
       const { data, error } = await supabase
         .from('score_archive')
         .insert([{
@@ -251,7 +251,7 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
       } else {
         logToPage("Update success: " + JSON.stringify(data));
       }
-    }
+    // }
 
     localStorage.removeItem('selectedScore');
 }
