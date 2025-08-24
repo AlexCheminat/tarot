@@ -221,10 +221,10 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
         .eq('id', archiveId);
 
         if (error) {
-          logToPage("Update error: " + error.message);
+          logToPage("Update error: " + error.message + archiveId);
           logToPage(error);
         } else {
-          logToPage("Update success: " + JSON.stringify(data));
+          logToPage("Update success: " + JSON.stringify(data) + archiveId);
         }
 
         removePrevScores();
@@ -246,10 +246,10 @@ async function archiveScore(formData, attPlayer, equipier, defPlayer) {
       }]);
 
       if (error) {
-        logToPage("Update error: " + error.message);
+        logToPage("Update error: " + error.message + archiveId);
         logToPage(error);
       } else {
-        logToPage("Update success: " + JSON.stringify(data));
+        logToPage("Update success: " + JSON.stringify(data) + archiveId);
       }
     }
 
