@@ -78,7 +78,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         console.log('Entered case 11');
         console.log('data length: ' + data.length);
         console.log('Groups:', data);
-        if (data.length === 0) {
+        if (data.length === 50) {
           console.log('No groups found, creating new group');
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
