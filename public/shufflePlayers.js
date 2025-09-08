@@ -57,7 +57,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         break;
       case 9:
         console.log('Entered case 9');
-        console.log('Data: ' + data);
+        console.log('Groups:', data);
         if (data.length === 0) {
           console.log('No data');
           chosen = get5(todos);
@@ -72,6 +72,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
           document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         } else {
+          console.log('Data found');
           data.forEach(group => {
             chosen = getPlayers(todos, group.group1);
             notChosen = getPlayers(todos, group.group2);
