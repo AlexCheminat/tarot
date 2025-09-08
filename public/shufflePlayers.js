@@ -12,7 +12,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*`, { headers });
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
-    const scores = await res.json();
+    const todos = await res.json();
 
     // Fetch groups
     const { data: groups, error } = await supabase
@@ -25,7 +25,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     const groupNames = new Set(groups.map(g => g.name));
 
     // Check each score
-    const missing = scores.filter(score => !groupNames.has(score.name));
+    const missing = todos.filter(score => !groupNames.has(score.name));
 
     if (missing.length > 0) {
       console.log("These scores have no matching group:", missing);
