@@ -1,4 +1,4 @@
-const SUPABASE_URL = "https://lanbxsawcjelsngtawxw.supabase.co";
+const SUPABASE_URL = "https://lanbxsawcjelsngtawxw.supabase.co"; 
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhbmJ4c2F3Y2plbHNuZ3Rhd3h3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4MTIzMjYsImV4cCI6MjA2MzM4ODMyNn0.OePJTwjh3sn42LDiHKGpXlLkIFvipHC507KaqOIEy3k";
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -10,6 +10,7 @@ const headers = {
 
 document.getElementById('shuffleBtn').addEventListener('click', async () => {
   try {
+    // Fetch scores
     const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*`, { headers });
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
     const todos = await res.json();
@@ -21,10 +22,8 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
     if (error) throw new Error(error.message);
 
-    // Create a Set of group names for quick lookup
+    // Check for missing groups
     const groupNames = new Set(groups.map(g => g.name));
-
-    // Check each score
     const missing = todos.filter(score => !groupNames.has(score.name));
 
     if (missing.length > 0) {
@@ -36,6 +35,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
     const numPlayers = todos.length;
     console.log(`Number of players: ${numPlayers}`);
+
     switch (numPlayers) {
       case 6:
         chosen = get5(todos);
@@ -43,78 +43,88 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('chosen').textContent = 'Joueurs: ' + getNames(chosen).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateur: ' + getNames(notChosen).join(', ');
         break;
+
       case 7:
-        chosen = get5(todos);
-        notChosen = getRest(chosen, todos);
-        document.getElementById('chosen').textContent = 'Joueurs: ' + getNames(chosen).join(', ');
-        document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
-        break;
       case 8:
         chosen = get5(todos);
         notChosen = getRest(chosen, todos);
         document.getElementById('chosen').textContent = 'Joueurs: ' + getNames(chosen).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
         break;
+
       case 9:
         console.log('Entered case 9');
-        console.log('Groups:', data);
-        if (data.length === 0) {
-          console.log('No data');
+        console.log('Groups:', groups);
+
+        if (groups.length === 0) {
+          console.log('No groups found');
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
-          const { data, error } = await supabase
-          .from('groups')
-          .insert([{
-            group1: getNames(chosen),
-            group2: getNames(notChosen),
-          }]);
+
+          const { data: insertData, error: insertError } = await supabase
+            .from('groups')
+            .insert([{
+              group1: getNames(chosen),
+              group2: getNames(notChosen),
+            }]);
+
+          if (insertError) console.error("Error inserting groups:", insertError);
+
           updateRounds(todos, notChosen);
           document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
           document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         } else {
-          console.log('Data found');
-          data.forEach(group => {
+          console.log('Groups found');
+          groups.forEach(group => {
             chosen = getPlayers(todos, group.group1);
             notChosen = getPlayers(todos, group.group2);
           });
+
           const theChosenOne = get1(chosen);
           notChosen.push(theChosenOne);
           chosen.splice(chosen.indexOf(theChosenOne), 1);
+
           await supabase
-          .from('groups')
-          .insert([{
-            group1: getNames(notChosen),
-            group2: getNames(chosen),
-          }]);
+            .from('groups')
+            .insert([{
+              group1: getNames(notChosen),
+              group2: getNames(chosen),
+            }]);
+
           document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
           document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         }
         console.log('Leaving case 9');
         break;
+
       case 10:
         chosen = get5(todos);
         notChosen = getRest(chosen, todos);
         document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
         document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         break;
+
       case 11:
         console.log('Entered case 11');
-        console.log('data length: ' + data.length);
-        console.log('Groups:', data);
-        if (data.length === 0) {
+        console.log('Groups length: ' + groups.length);
+        console.log('Groups:', groups);
+
+        if (groups.length === 0) {
           console.log('No groups found, creating new group');
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
           console.log('Groups:', chosen, notChosen);
-          const { data, error } = await supabase
-          .from('groups')
-          .insert([{
-            group1: getNames(chosen),
-            group2: getNames(notChosen),
-          }]);
-          console.log('Inserted groups:');
+
+          const { data: insertData, error: insertError } = await supabase
+            .from('groups')
+            .insert([{
+              group1: getNames(chosen),
+              group2: getNames(notChosen),
+            }]);
+
+          if (insertError) console.error("Error inserting groups:", insertError);
         } else {
-          data.forEach(group => {
+          groups.forEach(group => {
             chosen = getPlayers(todos, group.group1);
             notChosen = getPlayers(todos, group.group2);
           });
@@ -124,55 +134,57 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         console.log('Chosen2:', chosen2);
         notChosen = getRest2(chosen, chosen2, todos);
         console.log('Not chosen:', notChosen);
+
         document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
         document.getElementById('chosen2').textContent = 'Table 2: ' + getNames(chosen2).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateur: ' + getNames(notChosen).join(', ');
         break;
+
       case 12:
         console.log('Entered case 12');
-        console.log('Groups:', data);
-        console.log('Error:', error);
-        if (error) {
-          console.log('Error fetching groups:', error2);
-        } else if (data.length === 0) {
+        console.log('Groups:', groups);
+
+        if (groups.length === 0) {
           console.log('No groups found, creating new group');
           chosenPlayers = get6(todos);
           console.log('Chosen players:', chosenPlayers);
           notChosenPlayers = getRest(chosenPlayers, todos);
-          console.log('rest:', notChosenPlayers);
-          console.log('What im about to insert: ', getNames(chosenPlayers), getNames(notChosenPlayers));
-          const insertResult = await supabase
-          .from('groups')
-          .insert([{
-            group1: getNames(chosenPlayers),
-            group2: getNames(notChosenPlayers),
-          }]);
-          console.log('Inserted groups');
+          console.log('Rest:', notChosenPlayers);
+
+          const { data: insertData, error: insertError } = await supabase
+            .from('groups')
+            .insert([{
+              group1: getNames(chosenPlayers),
+              group2: getNames(notChosenPlayers),
+            }]);
+
+          if (insertError) console.error("Error inserting groups:", insertError);
         } else {
           console.log('Groups found, using existing groups');
-          data.forEach(group => {
+          groups.forEach(group => {
             chosenPlayers = getPlayers(todos, group.group1);
             notChosenPlayers = getPlayers(todos, group.group2);
           });
         }
+
         chosen1Players = get5(chosenPlayers);
         console.log('Chosen1:', chosen1Players);
         chosen2Players = get5(notChosenPlayers);
         console.log('Chosen2:', chosen2Players);
         notChosen2 = getNames(getRest2(chosen1Players, chosen2Players, todos));
-        console.log('Two others:', notChosen2);
-        console.log('Group1:', getNames(chosen1Players));
-        console.log('Group2:', getNames(chosen2Players));
-        console.log('Spectator:', notChosen2);
+        console.log('Spectators:', notChosen2);
+
         document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen1Players).join(', ');
         document.getElementById('chosen2').textContent = 'Table 2: ' + getNames(chosen2Players).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen2.join(', ');
         break;
+
       default:
         alert('Nombre de joueurs non supporté. Veuillez utiliser 5 ou 6 joueurs.');
         return;
     }
 
+    // Add luck message if not already present
     if (!document.getElementById('luckMsg')) {
       const msg = document.createElement('p');
       msg.id = 'luckMsg';
@@ -180,10 +192,12 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
       document.body.appendChild(msg);
     }
 
-    } catch (error) {
-      console.error('Failed to load scores:', error);
-    }
+  } catch (error) {
+    console.error('Failed to load scores:', error);
+  }
 });
+
+/* ----------------------- Helper functions ----------------------- */
 
 function get5(todos) {
   console.log('Entered get5 function');
@@ -196,9 +210,9 @@ function get5(todos) {
     resetGroups();
   }
 
+  let chosen = [];
   let c = todos.filter(todo => todo.parties === min).length;
 
-  let chosen = [];
   if (c > 4) {
     while (chosen.length < 5) {
       const rand = Math.floor(Math.random() * todos.length);
@@ -231,9 +245,10 @@ function get6(todos) {
   if (min % 5 === 4) {
     resetGroups();
   }
-  let c = todos.filter(todo => todo.parties === min).length;
 
   let chosen = [];
+  let c = todos.filter(todo => todo.parties === min).length;
+
   if (c > 5) {
     while (chosen.length < 6) {
       const rand = Math.floor(Math.random() * todos.length);
@@ -271,56 +286,32 @@ function get1(chosen) {
 }
 
 function getRest(chosen, todos) {
-  let notChosen = [];
-  todos.forEach(todo => {
-    if (!chosen.includes(todo)) {
-      notChosen.push(todo);
-    }
-  });
-  return notChosen;
+  return todos.filter(todo => !chosen.includes(todo));
 }
 
 function getRest2(chosen, chosen2, todos) {
   console.log('Entered getRest2 function');
-  let notChosen = [];
-  todos.forEach(todo => {
-    console.log('Checking todo:', todo);
-    if ((!chosen.includes(todo)) && (!chosen2.includes(todo))) {
-      console.log('PUSHING!!!');
-      notChosen.push(todo);
-    }
-  });
-  return notChosen;
+  return todos.filter(todo => !chosen.includes(todo) && !chosen2.includes(todo));
 }
 
 function getNames(players) {
-  let names = [];
-  players.forEach(player => {
-    names.push(player.name);
-  });
-  return names;
+  return players.map(player => player.name);
 }
 
 function getPlayers(todos, names) {
-  let players = [];
-  todos.forEach(todo => {
-    if (names.includes(todo.name)) {
-      players.push(todo);
-    }
-  });
-  return players;
+  return todos.filter(todo => names.includes(todo.name));
 }
 
 function resetGroups() {
   supabase
-  .from('groups')
-  .delete()
-  .eq('id', 1)
-  .then(({ data, error }) => {
-    if (error) {
-      console.error('Error resetting groups:', error);
-    } else {
-      console.log('Groups reset successfully');
-    }
-  });
+    .from('groups')
+    .delete()
+    .eq('id', 1)
+    .then(({ data, error }) => {
+      if (error) {
+        console.error('Error resetting groups:', error);
+      } else {
+        console.log('Groups reset successfully');
+      }
+    });
 }
