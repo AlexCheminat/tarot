@@ -35,6 +35,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     }
 
     const numPlayers = todos.length;
+    console.log(`Number of players: ${numPlayers}`);
     switch (numPlayers) {
       case 6:
         chosen = get5(todos);
@@ -55,6 +56,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
         break;
       case 9:
+        console.log('Entered case 9');
         console.log('Data: ' + data);
         if (data.length === 0) {
           console.log('No data');
