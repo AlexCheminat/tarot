@@ -12,11 +12,26 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*`, { headers });
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
-    console.log('Scores fetched successfully: ', res );
-    const todos = await res.json();
-    const { data, error } = await supabase
-        .from('groups')
-        .select();
+    const scores = await res.json();
+
+    // Fetch groups
+    const { data: groups, error } = await supabase
+      .from('groups')
+      .select();
+
+    if (error) throw new Error(error.message);
+
+    // Create a Set of group names for quick lookup
+    const groupNames = new Set(groups.map(g => g.name));
+
+    // Check each score
+    const missing = scores.filter(score => !groupNames.has(score.name));
+
+    if (missing.length > 0) {
+      console.log("These scores have no matching group:", missing);
+    } else {
+      console.log("✅ All scores have matching groups");
+    }
 
     const numPlayers = todos.length;
     switch (numPlayers) {
