@@ -54,7 +54,9 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
         break;
       case 9:
+        console.log('Data: ' + data);
         if (data.length === 0) {
+          console.log('No data');
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
