@@ -27,12 +27,6 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     // Check each score
     const missing = todos.filter(score => !groupNames.has(score.name));
 
-    if (missing.length > 0) {
-      console.log("These scores have no matching group:", missing);
-    } else {
-      console.log("✅ All scores have matching groups");
-    }
-
     const numPlayers = todos.length;
     switch (numPlayers) {
       case 6:
@@ -54,7 +48,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
         break;
       case 9:
-        if (data.length === 0) {
+        if (missing > 0) {
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
@@ -94,7 +88,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         console.log('Entered case 11');
         console.log('data length: ' + data.length);
         console.log('Groups:', data);
-        if (data.length === 0) {
+        if (missing > 0) {
           console.log('No groups found, creating new group');
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
@@ -127,7 +121,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         console.log('Error:', error);
         if (error) {
           console.log('Error fetching groups:', error2);
-        } else if (data.length === 0) {
+        } else if (missing > 0) {
           console.log('No groups found, creating new group');
           chosenPlayers = get6(todos);
           console.log('Chosen players:', chosenPlayers);
