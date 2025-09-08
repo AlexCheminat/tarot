@@ -12,6 +12,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*`, { headers });
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
+    console.log('Scores fetched successfully: ', res );
     const todos = await res.json();
     const { data, error } = await supabase
         .from('groups')
@@ -38,7 +39,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + getNames(notChosen).join(', ');
         break;
       case 9:
-        if (data.length === 50) {
+        if (data.length === 0) {
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
           const { data, error } = await supabase
@@ -78,7 +79,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         console.log('Entered case 11');
         console.log('data length: ' + data.length);
         console.log('Groups:', data);
-        if (data.length === 50) {
+        if (data.length === 0) {
           console.log('No groups found, creating new group');
           chosen = get5(todos);
           notChosen = getRest(chosen, todos);
@@ -111,7 +112,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         console.log('Error:', error);
         if (error) {
           console.log('Error fetching groups:', error2);
-        } else if (data.length === 50) {
+        } else if (data.length === 0) {
           console.log('No groups found, creating new group');
           chosenPlayers = get6(todos);
           console.log('Chosen players:', chosenPlayers);
