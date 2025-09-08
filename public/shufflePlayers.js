@@ -89,6 +89,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
           document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         }
+        console.log('Leaving case 9');
         break;
       case 10:
         chosen = get5(todos);
