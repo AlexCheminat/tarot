@@ -74,11 +74,8 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         } else {
           console.log('Groups found');
-          if (groups.length === 1) {
-            group = groups[0];
-          } else {
-            group = groups[-1];
-          }
+
+          group = groups[0];
 
           console.log('Using group:', group);
 
@@ -88,6 +85,8 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           const theChosenOne = get1(chosen);
           notChosen.push(theChosenOne);
           chosen.splice(chosen.indexOf(theChosenOne), 1);
+
+          resetGroups();
 
           await supabase
             .from('groups')
