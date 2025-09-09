@@ -69,7 +69,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
           if (insertError) console.error("Error inserting groups:", insertError);
 
-          updateRounds(todos, notChosen);
+          // updateRounds(todos, notChosen);
           document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
           document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         } else {
