@@ -28,7 +28,6 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
     if (missing.length > 0) {
       console.log("⚠️ Some scores do not have matching groups, resetting groups...");
-      resetGroups();
     } else {
       console.log("✅ All scores have matching groups");
     }
