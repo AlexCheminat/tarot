@@ -87,6 +87,10 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           notChosen.push(theChosenOne);
           chosen.splice(chosen.indexOf(theChosenOne), 1);
 
+          document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
+          document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
+
+          await sleep(2000);
           await supabase
             .from('groups')
             .insert([{
@@ -94,8 +98,6 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
               group2: getNames(chosen),
             }]);
 
-          document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
-          document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         }
         console.log('Leaving case 9');
         break;
