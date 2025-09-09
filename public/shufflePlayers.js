@@ -91,6 +91,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
 
           await sleep(2000);
+          console.log('Updating groups for next time');
           await supabase
             .from('groups')
             .insert([{
