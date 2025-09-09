@@ -74,7 +74,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
         } else {
           console.log('Groups found');
-          group = groups[0];
+          group = groups[-1];
           chosen = getPlayers(todos, group.group1);
           notChosen = getPlayers(todos, group.group2);
 
