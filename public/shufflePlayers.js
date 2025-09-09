@@ -76,6 +76,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           console.log('Groups found');
 
           group = groups[0];
+          resetGroups();
 
           console.log('Using group:', group);
 
@@ -85,8 +86,6 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
           const theChosenOne = get1(chosen);
           notChosen.push(theChosenOne);
           chosen.splice(chosen.indexOf(theChosenOne), 1);
-
-          resetGroups();
 
           await supabase
             .from('groups')
