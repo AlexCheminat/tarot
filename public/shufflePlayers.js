@@ -98,7 +98,6 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
               group1: getNames(notChosen),
               group2: getNames(chosen),
             }]);
-
         }
         console.log('Leaving case 9');
         break;
@@ -186,7 +185,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         break;
 
       default:
-        alert('Nombre de joueurs non supporté. Veuillez utiliser 5 ou 6 joueurs.');
+        alert('Nombre de joueurs non supporté. Veuillez utiliser entre 6 et 12 joueurs.');
         return;
     }
 
