@@ -26,6 +26,15 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     const groupNames = new Set(groups.map(g => g.name));
     const missing = todos.filter(score => !groupNames.has(score.name));
 
+    let min = todos[0].parties || 0;
+    todos.forEach(todo => {
+      if (todo.parties < min) min = todo.parties;
+    });
+
+    if (min % 5 === 0) {
+      resetGroups();
+  }
+
     if (missing.length > 0) {
       console.log("⚠️ Some scores do not have matching groups, resetting groups...");
     } else {
@@ -211,10 +220,6 @@ function get5(todos) {
     if (todo.parties < min) min = todo.parties;
   });
 
-  if (min % 5 === 4) {
-    resetGroups();
-  }
-
   let chosen = [];
   let c = todos.filter(todo => todo.parties === min).length;
 
@@ -246,10 +251,6 @@ function get6(todos) {
   todos.forEach(todo => {
     if (todo.parties < min) min = todo.parties;
   });
-
-  if (min % 5 === 4) {
-    resetGroups();
-  }
 
   let chosen = [];
   let c = todos.filter(todo => todo.parties === min).length;
