@@ -101,6 +101,13 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
             }]);
         }
 
+        for (const name of getNames(notChosen)) {
+          await supabase
+            .from('scores')
+            .update({ roundOf4: supabase.increment(1) })
+            .eq('name', name);
+        }
+
         min = todos[0].parties || 0;
         todos.forEach(todo => {
           if (todo.parties < min) min = todo.parties;
