@@ -211,7 +211,7 @@ function get5(todos) {
     if (todo.parties < min) min = todo.parties;
   });
 
-  if (min % 5 === 4) {
+  if (min % 5 === 0) {
     resetGroups();
   }
 
