@@ -101,7 +101,9 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
             }]);
         }
 
+        console.log('Updating roundOf4 for not chosen players');
         for (const name of getNames(notChosen)) {
+          console.log('Incrementing roundOf4 for', name);
           await supabase
             .from('scores')
             .update({ roundOf4: supabase.increment(1) })
