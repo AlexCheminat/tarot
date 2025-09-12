@@ -35,6 +35,7 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
     const numPlayers = todos.length;
     console.log(`Number of players: ${numPlayers}`);
 
+    let min = 0;
     switch (numPlayers) {
       case 6:
         chosen = get5(todos);
@@ -99,6 +100,15 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
               group2: getNames(chosen),
             }]);
         }
+
+        min = todos[0].parties || 0;
+        todos.forEach(todo => {
+          if (todo.parties < min) min = todo.parties;
+        });
+
+        if (min === 8) {
+          resetGroups();
+        }
         console.log('Leaving case 9');
         break;
 
@@ -143,6 +153,15 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
         document.getElementById('chosen2').textContent = 'Table 2: ' + getNames(chosen2).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateur: ' + getNames(notChosen).join(', ');
+
+        min = todos[0].parties || 0;
+        todos.forEach(todo => {
+          if (todo.parties < min) min = todo.parties;
+        });
+
+        if (min === 9) {
+          resetGroups();
+        }
         break;
 
       case 12:
@@ -182,6 +201,15 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen1Players).join(', ');
         document.getElementById('chosen2').textContent = 'Table 2: ' + getNames(chosen2Players).join(', ');
         document.getElementById('notChosen').textContent = 'Spectateurs: ' + notChosen2.join(', ');
+
+        let min = todos[0].parties || 0;
+        todos.forEach(todo => {
+          if (todo.parties < min) min = todo.parties;
+        });
+
+        if (min === 9) {
+          resetGroups();
+        }
         break;
 
       default:
