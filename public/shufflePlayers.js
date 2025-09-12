@@ -320,13 +320,13 @@ function get6(todos) {
 }
 
 function get1(chosen) {
-  let max = chosen[0].roundOf4;
+  let min = chosen[0].roundOf4;
   chosen.forEach(player => {
-    if (player.roundOf4 > max) max = player.roundOf4;
+    if (player.roundOf4 < min) min = player.roundOf4;
   });
 
   let rand = Math.floor(Math.random() * chosen.length);
-  while (chosen[rand].roundOf4 !== max) {
+  while (chosen[rand].roundOf4 !== min) {
     rand = Math.floor(Math.random() * chosen.length);
   }
   return chosen[rand];
