@@ -45,10 +45,10 @@ data.forEach(entry => {
         `;
     }
 
-    button.addEventListener('click', () => {
-        localStorage.setItem('selectedScore', JSON.stringify(entry));
-        window.location.href = "addScore.html";
-    });
+    // button.addEventListener('click', () => {
+    //     localStorage.setItem('selectedScore', JSON.stringify(entry));
+    //     window.location.href = "addScore.html";
+    // });
 
     container.appendChild(button);
 });
