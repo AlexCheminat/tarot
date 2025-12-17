@@ -8,6 +8,81 @@ const headers = {
   "Content-Type": "application/json"
 };
 
+// ===== FINGERPRINT DISPLAY SECTION =====
+async function getDeviceFingerprint() {
+  const data = [
+    navigator.userAgent,
+    navigator.language,
+    screen.colorDepth,
+    screen.width + 'x' + screen.height,
+    new Date().getTimezoneOffset(),
+    navigator.hardwareConcurrency,
+    navigator.platform
+  ].join('|');
+
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(data));
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Display fingerprint on page load
+window.addEventListener('DOMContentLoaded', async () => {
+  const fingerprint = await getDeviceFingerprint();
+  
+  // Create fingerprint display element
+  const fingerprintDiv = document.createElement('div');
+  fingerprintDiv.style.cssText = `
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #f0f0f0;
+    border: 2px solid #333;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 12px;
+    max-width: 300px;
+    word-break: break-all;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  `;
+  
+  fingerprintDiv.innerHTML = `
+    <div style="font-weight: bold; margin-bottom: 8px; color: #d9534f;">🔐 Device Fingerprint:</div>
+    <div style="background: white; padding: 8px; border-radius: 4px; margin-bottom: 10px;">${fingerprint}</div>
+    <button id="copyFingerprintBtn" style="
+      background: #5cb85c;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    ">📋 Copy Fingerprint</button>
+    <div id="copySuccess" style="
+      color: #5cb85c;
+      margin-top: 8px;
+      text-align: center;
+      display: none;
+      font-weight: bold;
+    ">✓ Copied!</div>
+  `;
+  
+  document.body.appendChild(fingerprintDiv);
+  
+  // Add copy functionality
+  document.getElementById('copyFingerprintBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText(fingerprint).then(() => {
+      const success = document.getElementById('copySuccess');
+      success.style.display = 'block';
+      setTimeout(() => {
+        success.style.display = 'none';
+      }, 2000);
+    });
+  });
+});
+// ===== END FINGERPRINT SECTION =====
+
 document.getElementById('shuffleBtn').addEventListener('click', async () => {
   try {
     // Fetch scores
