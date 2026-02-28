@@ -1,40 +1,20 @@
-const SUPABASE_URL = "https://lanbxsawcjelsngtawxw.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhbmJ4c2F3Y2plbHNuZ3Rhd3h3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4MTIzMjYsImV4cCI6MjA2MzM4ODMyNn0.OePJTwjh3sn42LDiHKGpXlLkIFvipHC507KaqOIEy3k";
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-const headers = {
-  "apikey": SUPABASE_ANON_KEY,
-  "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-  "Content-Type": "application/json"
-};
+import { db } from './firebase.js';
+import {
+  collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy, onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const tableBody = document.querySelector('#myTable tbody');
 const form = document.getElementById('todo-form');
 const input = document.getElementById('todo-input');
-
-// Sync from localStorage
-window.addEventListener('storage', (event) => {
-  if (event.key === 'playerScores' && tableBody) {
-    const scores = JSON.parse(event.newValue || '{}');
-    document.querySelectorAll('#myTable tbody tr').forEach(row => {
-      const playerName = row.dataset.name;
-      const scoreCell = row.querySelector('.score-cell');
-      if (playerName && scoreCell && scores[playerName] !== undefined) {
-        scoreCell.textContent = scores[playerName];
-      }
-    });
-  }
-});
 
 let loadTodos;
 
 if (tableBody) {
   loadTodos = async () => {
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?select=*`, { headers });
-      if (!res.ok) throw new Error(`Server error: ${res.status}`);
-      const todos = await res.json();
-      todos.sort((a, b) => (b.score || 0) - (a.score || 0));
+      const q = query(collection(db, 'scores'), orderBy('score', 'desc'));
+      const snapshot = await getDocs(q);
+      const todos = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
 
       const topScore = todos[0]?.score || 0;
       const secondScore = todos[1]?.score || 0;
@@ -46,11 +26,11 @@ if (tableBody) {
 
       tableBody.innerHTML = '';
 
-      const alone = todos[todos.length - 1]?.score < (todos[todos.length - 2]?.score || -9999);
+      const alone = todos.length >= 2 && todos[todos.length - 1]?.score < todos[todos.length - 2]?.score;
 
       todos.forEach(todo => {
         const isLast = todo.id === todos[todos.length - 1]?.id && alone;
-        addRow(todo, todo.score || 0, todo.parties, isLast);
+        addRow(todo, todo.score || 0, todo.parties || 0, isLast);
       });
     } catch (error) {
       console.error('Failed to load scores:', error);
@@ -73,11 +53,7 @@ if (tableBody) {
 
     tr.querySelector('.delete-btn').addEventListener('click', async () => {
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?id=eq.${todo.id}`, {
-          method: 'DELETE',
-          headers
-        });
-        if (!res.ok) throw new Error(`Delete failed: ${res.status}`);
+        await deleteDoc(doc(db, 'scores', todo.id));
         loadTodos();
       } catch (error) {
         console.error('Failed to delete score:', error);
@@ -87,16 +63,13 @@ if (tableBody) {
     tableBody.appendChild(tr);
   }
 
-  // Realtime Supabase listener
-  supabase
-    .channel('realtime:scores')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'scores' }, payload => {
-      console.log('Change received!', payload);
-      loadTodos();
-    })
-    .subscribe();
+  // Realtime listener
+  const q = query(collection(db, 'scores'), orderBy('score', 'desc'));
+  onSnapshot(q, () => {
+    loadTodos();
+  });
 
-  loadTodos(); // Initial load
+  loadTodos();
 }
 
 if (form && input) {
@@ -106,12 +79,7 @@ if (form && input) {
     if (!text) return;
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/scores`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ name: text })
-      });
-      if (!res.ok) throw new Error(`Add failed: ${res.status}`);
+      await addDoc(collection(db, 'scores'), { name: text, score: 0, parties: 0, roundOf4: 0 });
       input.value = '';
       if (typeof loadTodos === 'function') loadTodos();
     } catch (error) {
@@ -123,38 +91,22 @@ if (form && input) {
 window.updatePlayerScore = async function (playerName, deltaScore, modified) {
   console.log('Updating score for:', playerName, 'by', deltaScore);
 
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/scores?name=eq.${encodeURIComponent(playerName)}`, { headers });
+  const snapshot = await getDocs(collection(db, 'scores'));
+  const playerDoc = snapshot.docs.find(d => d.data().name === playerName);
 
-  if (!res.ok) {
-    console.error("Failed to fetch player:", res.status);
-    return;
-  }
-
-  const [player] = await res.json();
-  if (!player) {
+  if (!playerDoc) {
     console.error("Player not found:", playerName);
     return;
   }
 
+  const player = playerDoc.data();
   const updatedScore = (player.score || 0) + deltaScore;
+  const updatedParties = modified ? (player.parties || 0) - 1 : (player.parties || 0) + 1;
 
-  let updatedParties;
-  if (modified) {
-    updatedParties = (player.parties || 0) - 1;
-  } else {
-    updatedParties = (player.parties || 0) + 1;
-  }
-
-
-  const updateRes = await fetch(`${SUPABASE_URL}/rest/v1/scores?id=eq.${player.id}`, {
-    method: 'PATCH',
-    headers,
-    body: JSON.stringify({ score: updatedScore, parties: updatedParties })
-  });
-
-  if (!updateRes.ok) {
-    console.error("Failed to update score:", updateRes.status);
-  } else {
+  try {
+    await updateDoc(doc(db, 'scores', playerDoc.id), { score: updatedScore, parties: updatedParties });
     console.log(`${playerName} score updated to ${updatedScore}`);
+  } catch (error) {
+    console.error("Failed to update score:", error);
   }
 };

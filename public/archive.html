@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Tarot Archive</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="images/naim.png" type="image/png">
 </head>
 <body id="archivePage">
-    <div class="back-btn">
+  <div class="back-btn">
     <button onclick="location.href='index.html'"><img src="images/back.png" alt="Back" width="40" height="40"></button>
-    </div>
-    <h1 class="title">Scores</h1>
-    <div id="scoreArchive"></div>
-    <button id="more" onclick="localStorage.removeItem('archiveId'); location.href='addScore.html'">+</button>
-    <button id="resetArchiveBtn">Supprimer</button>
-    <script src="loadArchive.js"></script>
-    <script src="resetArchive.js"></script>
-
-    <script>
-      localStorage.removeItem('selectedScore');
-    </script>
+  </div>
+  <h1 class="title">Scores</h1>
+  <div id="scoreArchive"></div>
+  <button id="more" onclick="localStorage.removeItem('archiveId'); location.href='addScore.html'">+</button>
+  <button id="resetArchiveBtn">Supprimer</button>
+  <script type="module" src="loadArchive.js"></script>
+  <script type="module" src="resetArchive.js"></script>
+  <script>
+    localStorage.removeItem('selectedScore');
+  </script>
 </body>
 </html>

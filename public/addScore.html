@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Tarot Score</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="images/naim.png" type="image/png">
 </head>
@@ -16,102 +15,91 @@
   <form id="score-form">
   <div id="container">
     <div id="table">
-    <h2>Table</h2>
-    <div id="checkbox-list" name="table"></div>
+      <h2>Table</h2>
+      <div id="checkbox-list" name="table"></div>
     </div>
 
     <div id="table">
-    <h2>Preneur</h2>
-    <div id="radio-list" name="preneur"></div>
+      <h2>Preneur</h2>
+      <div id="radio-list" name="preneur"></div>
     </div>
 
     <div id="table">
-    <h2>Équipier</h2>
-    <div id="radio-list-2" name="equipier"></div>
+      <h2>Équipier</h2>
+      <div id="radio-list-2" name="equipier"></div>
     </div>
 
     <div id="nombre">
-    <div class="points"><h2>Points</h2>
-    <input type="number" id="points" name="points" placeholder="Points de l'attaque" required min="0" max="91"/></div>
+      <div class="points"><h2>Points</h2>
+      <input type="number" id="points" name="points" placeholder="Points de l'attaque" required min="0" max="91"/></div>
     </div>
 
     <div id="nombre">
       <h2>Nombre de Bouts</h2>
-      <input type="number" id="bout" name="bout" placeholder="Nomber de bouts" required min="0" max="3"/></div>
+      <input type="number" id="bout" name="bout" placeholder="Nomber de bouts" required min="0" max="3"/>
     </div>
 
     <div id="contrat">
-    <h2>Contrat</h2>
-    <div class="pill-radio">
-    <input type="radio" id="contrat1" name="contrat" value="1"><label for="contrat1">Prise</label>
-    <input type="radio" id="contrat2" name="contrat" value="2"><label for="contrat2">Garde</label>
-    <input type="radio" id="contrat3" name="contrat" value="3"><label for="contrat3">Garde Sans</label>
-    <input type="radio" id="contrat4" name="contrat" value="4"><label for="contrat4">Garde Contre</label>
-    </div>
+      <h2>Contrat</h2>
+      <div class="pill-radio">
+        <input type="radio" id="contrat1" name="contrat" value="1"><label for="contrat1">Prise</label>
+        <input type="radio" id="contrat2" name="contrat" value="2"><label for="contrat2">Garde</label>
+        <input type="radio" id="contrat3" name="contrat" value="3"><label for="contrat3">Garde Sans</label>
+        <input type="radio" id="contrat4" name="contrat" value="4"><label for="contrat4">Garde Contre</label>
+      </div>
     </div>
 
     <div id="prime">
-    <h2>Les Primes</h2>
-    <div class="pill-radio">
-      <div class="pill-row">
-        <input type="radio" id="prime1" name="prime1" value="1"><label for="prime1">Petit au bout (Attaque)</label>
-        <input type="radio" id="prime2" name="prime1" value="2"><label for="prime2">Petit au bout (Défense)</label>
-      </div>
-      <div class="pill-row">
-        <input type="radio" id="prime3" name="prime2" value="3"><label for="prime3">Simple Poignée</label>
-        <input type="radio" id="prime4" name="prime2" value="4"><label for="prime4">2x Simple Poignées</label>
-        <input type="radio" id="prime5" name="prime2" value="5"><label for="prime5">Double Poignée</label>
-        <input type="radio" id="prime6" name="prime2" value="6"><label for="prime6">Triple Poignée</label>
-      </div>
-      <div class="pill-row">
-        <input type="radio" id="prime7" name="prime3" value="7"><label for="prime7">Chelem Annoncé</label>
-        <input type="radio" id="prime8" name="prime3" value="8"><label for="prime8">Chelem Non annoncé</label>
-        <input type="radio" id="prime9" name="prime3" value="9"><label for="prime9">Chelem Perdu</label>
+      <h2>Les Primes</h2>
+      <div class="pill-radio">
+        <div class="pill-row">
+          <input type="radio" id="prime1" name="prime1" value="1"><label for="prime1">Petit au bout (Attaque)</label>
+          <input type="radio" id="prime2" name="prime1" value="2"><label for="prime2">Petit au bout (Défense)</label>
+        </div>
+        <div class="pill-row">
+          <input type="radio" id="prime3" name="prime2" value="3"><label for="prime3">Simple Poignée</label>
+          <input type="radio" id="prime4" name="prime2" value="4"><label for="prime4">2x Simple Poignées</label>
+          <input type="radio" id="prime5" name="prime2" value="5"><label for="prime5">Double Poignée</label>
+          <input type="radio" id="prime6" name="prime2" value="6"><label for="prime6">Triple Poignée</label>
+        </div>
+        <div class="pill-row">
+          <input type="radio" id="prime7" name="prime3" value="7"><label for="prime7">Chelem Annoncé</label>
+          <input type="radio" id="prime8" name="prime3" value="8"><label for="prime8">Chelem Non annoncé</label>
+          <input type="radio" id="prime9" name="prime3" value="9"><label for="prime9">Chelem Perdu</label>
+        </div>
       </div>
     </div>
-    </div>
+
     <div id="result">
       <h2>Résultats</h2>
-    <div id="scores"><p>Preneur : <span id="preneur"></span></p>
-    <p id="equipier-line">Équipier : <span id="equipier"></span></p>
-    <p>Défense : <span id="defense"></span></p></div>
-    <div class="submit-btn"><button id="submit" type="submit">Confirmer</button></div>
+      <div id="scores">
+        <p>Preneur : <span id="preneur"></span></p>
+        <p id="equipier-line">Équipier : <span id="equipier"></span></p>
+        <p>Défense : <span id="defense"></span></p>
+      </div>
+      <div class="submit-btn"><button id="submit" type="submit">Confirmer</button></div>
     </div>
   </div>
-    <br /><br />
+  <br /><br />
   </form>
 
-
-  <script src="script.js"></script>
-  <script src="updateRadio.js"></script>
+  <script type="module" src="updateRadio.js"></script>
+  <script type="module" src="score.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script src="score.js" defer></script>
 
-  <script>
-    // Attach form submit handler to prevent default and call submitForm()
+  <script type="module">
+    import { db } from './firebase.js';
+
     document.getElementById('score-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      submitForm();
+      window.submitForm();
     });
-  </script>
 
-  <script>
     document.getElementById('submit').addEventListener('click', function () {
-      // Fire some confetti!
-      confetti({
-      particleCount: 500,
-      spread: 180,
-      startVelocity: -80,
-      origin: { y: 0 }
+      confetti({ particleCount: 500, spread: 180, startVelocity: -80, origin: { y: 0 } });
+      setTimeout(() => location.reload(), 2000);
     });
 
-    setTimeout(() => {
-      location.reload();
-    }, 2000);
-    });
-  </script>
-
-  <script>
     window.addEventListener('DOMContentLoaded', () => {
       const rawData = localStorage.getItem('selectedScore');
       if (!rawData) return;
@@ -120,20 +108,14 @@
       localStorage.setItem('archiveId', entry.id);
 
       let table = [entry.preneur_nom, entry.equipier_nom];
-      for (nom of entry.defense_nom) {
-        table.push(nom);
-      }
+      for (const nom of entry.defense_nom) table.push(nom);
 
       if (entry.primes !== null) {
-        console.log("enter");
-        for (prime of entry.primes) {
-          console.log(prime);
-          const primeRadio1 = document.querySelector(`[name="prime1"][value="${prime}"]`);
-          if (primeRadio1) primeRadio1.checked = true;
-          const primeRadio2 = document.querySelector(`[name="prime2"][value="${prime}"]`);
-          if (primeRadio2) primeRadio2.checked = true;
-          const primeRadio3 = document.querySelector(`[name="prime3"][value="${prime}"]`);
-          if (primeRadio3) primeRadio3.checked = true;
+        for (const prime of entry.primes) {
+          ['prime1','prime2','prime3'].forEach(name => {
+            const r = document.querySelector(`[name="${name}"][value="${prime}"]`);
+            if (r) r.checked = true;
+          });
         }
       }
 
@@ -141,19 +123,17 @@
         if (Array.isArray(table)) {
           table.forEach(name => {
             const checkbox = document.querySelector(`input[name="todo"][value="${name}"]`);
-            if (checkbox) {
-              checkbox.checked = true;
-            }
+            if (checkbox) checkbox.checked = true;
           });
         }
 
-        updateRadios();
+        window.updateRadios();
 
         const preneurRadio = document.querySelector(`[name="selected-task"][value="${entry.preneur_nom}"]`);
         if (preneurRadio) preneurRadio.checked = true;
         const equipierRadio = document.querySelector(`[name="selected-task2"][value="${entry.equipier_nom}"]`);
         if (equipierRadio) equipierRadio.checked = true;
-        previewScore();
+        window.previewScore?.();
       }, 600);
 
       document.querySelector('[name="points"]').value = entry.points;
@@ -162,6 +142,5 @@
       if (contratRadio) contratRadio.checked = true;
     });
   </script>
-
 </body>
 </html>

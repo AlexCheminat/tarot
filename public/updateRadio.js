@@ -1,3 +1,6 @@
+import { db } from './firebase.js';
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
 let preneur = null;
 let equipier = null;
 const checkboxContainer = document.getElementById('checkbox-list');
@@ -5,39 +8,28 @@ const radioContainer = document.getElementById('radio-list');
 const radioContainer2 = document.getElementById('radio-list-2');
 
 async function loadTasks() {
-  const res = await fetch('https://lanbxsawcjelsngtawxw.supabase.co/rest/v1/scores', {
-    method: 'GET',
-    headers: {
-      'apikey': SUPABASE_ANON_KEY,
-      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-      'Content-Type': 'application/json'
-    }
-  });
-
-  const todos = await res.json();
+  const snapshot = await getDocs(collection(db, 'scores'));
+  const todos = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
 
   checkboxContainer.innerHTML = '';
   radioContainer.innerHTML = '';
   radioContainer2.innerHTML = '';
 
-    todos.forEach((todo, index) => {
+  todos.forEach((todo, index) => {
     const label = document.createElement('label');
     label.className = 'task-item';
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.value = todo.name;
-    checkbox.id = `todo-${index}`; // unique ID
+    checkbox.id = `todo-${index}`;
     checkbox.name = 'todo';
 
-    checkbox.addEventListener('change', () => {
-      updateRadios();
-    });
+    checkbox.addEventListener('change', () => updateRadios());
 
-    label.setAttribute('for', checkbox.id); // associate label with checkbox
+    label.setAttribute('for', checkbox.id);
     label.textContent = todo.name;
 
-    // Add checkbox and label separately
     checkboxContainer.appendChild(checkbox);
     checkboxContainer.appendChild(label);
     checkboxContainer.appendChild(document.createElement('br'));
@@ -45,7 +37,7 @@ async function loadTasks() {
 }
 
 function updateRadios() {
-  radioContainer.innerHTML = ''; // Clear previous radios
+  radioContainer.innerHTML = '';
   radioContainer2.innerHTML = '';
 
   const checkedBoxes = checkboxContainer.querySelectorAll('input[type="checkbox"]:checked');
@@ -54,12 +46,11 @@ function updateRadios() {
     const todoId = checkbox.value;
     const todoText = checkbox.nextSibling.textContent.trim();
 
-    // First radio group
     const radio1 = document.createElement('input');
     radio1.type = 'radio';
     radio1.name = 'selected-task';
     radio1.value = todoId;
-    radio1.id = `radio1-${index}`; // unique ID
+    radio1.id = `radio1-${index}`;
 
     const label1 = document.createElement('label');
     label1.className = 'task-item';
@@ -71,21 +62,16 @@ function updateRadios() {
     radioContainer.appendChild(document.createElement('br'));
 
     radio1.addEventListener('click', function () {
-      if (preneur === this) {
-        this.checked = false;
-        preneur = null;
-      } else {
-        preneur = this;
-      }
+      if (preneur === this) { this.checked = false; preneur = null; }
+      else { preneur = this; }
       previewScore();
     });
 
-    // Second radio group
     const radio2 = document.createElement('input');
     radio2.type = 'radio';
     radio2.name = 'selected-task2';
     radio2.value = todoId;
-    radio2.id = `radio2-${index}`; // unique ID
+    radio2.id = `radio2-${index}`;
 
     const label2 = document.createElement('label');
     label2.className = 'task-item';
@@ -97,37 +83,12 @@ function updateRadios() {
     radioContainer2.appendChild(document.createElement('br'));
 
     radio2.addEventListener('click', function () {
-      if (equipier === this) {
-        this.checked = false;
-        equipier = null;
-      } else {
-        equipier = this;
-      }
+      if (equipier === this) { this.checked = false; equipier = null; }
+      else { equipier = this; }
       previewScore();
     });
   });
 }
 
-function addRadio(todo) {
-  const label = document.createElement('label');
-  label.id = `radio-${todo.id}`;
-
-  const radio = document.createElement('input');
-  radio.type = 'radio';
-  radio.name = 'selected-task';
-  radio.value = todo.id;
-
-  label.appendChild(radio);
-  label.appendChild(document.createTextNode(' ' + todo.name));
-  radioContainer.appendChild(label);
-  radioContainer.appendChild(document.createElement('br'));
-}
-
-function removeRadio(todoId) {
-  const label = document.getElementById(`radio-${todoId}`);
-  if (label) {
-    label.remove();
-  }
-}
-
+window.updateRadios = updateRadios;
 loadTasks();

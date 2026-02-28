@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Tarot Tableau</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="images/naim.png" type="image/png">
 </head>
@@ -14,7 +13,6 @@
     <input type="text" id="todo-input" placeholder="Ajouter un joueur" required>
     <button id="add">+</button>
   </form>
-  <!--Table-->
   <table id="myTable">
     <colgroup>
       <col class="col-name">
@@ -25,12 +23,10 @@
     <thead>
       <tr><th>Nom</th><th>Score</th><th>Parties</th><th>Supprimer</th></tr>
     </thead>
-    <tbody>
-      <!-- rows will go here -->
-    </tbody>
+    <tbody></tbody>
   </table>
   <div class="crown" id="crownLead"><img src="images/crown.webp" alt="Crown" width="35" height="35"></div>
-  <script src="script.js"></script>
-  <script src="score.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="score.js"></script>
 </body>
 </html>

@@ -1,3 +1,8 @@
+import { db } from './firebase.js';
+import {
+  collection, getDocs, deleteDoc, doc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
 const resetButton = document.getElementById('resetArchiveBtn');
 
 resetButton.addEventListener('click', async () => {
@@ -11,24 +16,13 @@ resetButton.addEventListener('click', async () => {
   if (!confirmed3) return;
 
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/score_archive?id=not.is.null`, {
-      method: 'DELETE',
-      headers: {
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-        'Content-Type': 'application/json',
-        Prefer: 'return=representation'  // Optional: returns deleted rows
-      }
-    });
+    const snapshot = await getDocs(collection(db, 'score_archive'));
+    const deletePromises = snapshot.docs.map(d => deleteDoc(doc(db, 'score_archive', d.id)));
+    await Promise.all(deletePromises);
 
-    if (!res.ok) {
-      throw new Error(`Failed to reset archive: ${res.status}`);
+    if (typeof window.loadArchive === 'function') {
+      window.loadArchive();
     }
-
-    if (typeof loadArchive === 'function') {
-      loadArchive();
-    }
-
   } catch (error) {
     console.error('Error resetting archive:', error);
     alert("Failed to reset archive.");
