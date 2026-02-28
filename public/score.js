@@ -1,7 +1,8 @@
 import { db } from './firebase.js';
 import {
-  collection, addDoc, doc, updateDoc, getDocs, query, where
+  collection, addDoc, doc, updateDoc, getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { updatePlayerScore } from './script.js';
 
 let contrat = null;
 let primeCheck1 = null;
@@ -29,12 +30,11 @@ document.querySelectorAll('input[type="radio"][name="contrat"]').forEach(radio =
   });
 });
 
-['prime1','prime2','prime3'].forEach((name, i) => {
-  let ref = [primeCheck1, primeCheck2, primeCheck3];
+[['prime1', primeCheck1], ['prime2', primeCheck2], ['prime3', primeCheck3]].forEach(([name, ref]) => {
   document.querySelectorAll(`input[type="radio"][name="${name}"]`).forEach(radio => {
     radio.addEventListener('click', function () {
-      if (ref[i] === this) { this.checked = false; ref[i] = null; }
-      else { ref[i] = this; }
+      if (ref === this) { this.checked = false; ref = null; }
+      else { ref = this; }
     });
   });
 });
@@ -115,11 +115,11 @@ function calculateScore(formData, isFinalSubmit) {
 
   if (isFinalSubmit) {
     const allDefenders = formData.players.filter(name => name !== formData.preneur && name !== formData.equipier);
-    window.updatePlayerScore(formData.preneur, attPlayer, false);
+    updatePlayerScore(formData.preneur, attPlayer, false);
     if (formData.preneur !== formData.equipier) {
-      window.updatePlayerScore(formData.equipier, equipierScore, false);
+      updatePlayerScore(formData.equipier, equipierScore, false);
     }
-    allDefenders.forEach(name => window.updatePlayerScore(name, defPlayer, false));
+    allDefenders.forEach(name => updatePlayerScore(name, defPlayer, false));
     archiveScore(formData, attPlayer, equipierScore, defPlayer);
   }
 }
@@ -186,11 +186,11 @@ function removePrevScores() {
   const rawData = localStorage.getItem('selectedScore');
   const entry = JSON.parse(rawData);
   console.log(entry);
-  window.updatePlayerScore(entry.preneur_nom, -entry.preneur_score, true);
+  updatePlayerScore(entry.preneur_nom, -entry.preneur_score, true);
   if (entry.preneur_nom !== entry.equipier_nom) {
-    window.updatePlayerScore(entry.equipier_nom, -entry.equipier_score, true);
+    updatePlayerScore(entry.equipier_nom, -entry.equipier_score, true);
   }
-  entry.defense_nom.forEach(name => window.updatePlayerScore(name, -entry.defense_score, true));
+  entry.defense_nom.forEach(name => updatePlayerScore(name, -entry.defense_score, true));
 }
 
 function setupAutoUpdate() {
@@ -209,3 +209,4 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 window.submitForm = submitForm;
+window.previewScore = previewScore;

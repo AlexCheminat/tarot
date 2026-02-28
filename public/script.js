@@ -88,7 +88,7 @@ if (form && input) {
   };
 }
 
-window.updatePlayerScore = async function (playerName, deltaScore, modified) {
+export async function updatePlayerScore(playerName, deltaScore, modified) {
   console.log('Updating score for:', playerName, 'by', deltaScore);
 
   const snapshot = await getDocs(collection(db, 'scores'));
