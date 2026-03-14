@@ -84,8 +84,8 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
         } else {
           const group = groups[0];
-          const prevGroup5 = getPlayers(todos, group.group5); // 5 players
-          const prevGroup4 = getPlayers(todos, group.group4); // 4 players
+          const prevGroup5 = getPlayers(todos, group.group5 || group.group1 || []);
+          const prevGroup4 = getPlayers(todos, group.group4 || group.group2 || []);
 
           // All 4 from group4 must go into the new group of 5
           // Pick 1 from prevGroup5 to join them (minimize pairings)
@@ -267,7 +267,10 @@ function get1(chosen) {
 function getRest(chosen, todos) { return todos.filter(todo => !chosen.includes(todo)); }
 function getRest2(chosen, chosen2, todos) { return todos.filter(todo => !chosen.includes(todo) && !chosen2.includes(todo)); }
 function getNames(players) { return players.map(player => player.name); }
-function getPlayers(todos, names) { return todos.filter(todo => names.includes(todo.name)); }
+function getPlayers(todos, names) {
+  if (!names || !Array.isArray(names)) return [];
+  return todos.filter(todo => names.includes(todo.name));
+}
 
 async function resetGroups(groups) {
   const deletePromises = groups.map(g => deleteDoc(doc(db, 'groups', g.id)));
