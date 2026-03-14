@@ -1,6 +1,6 @@
 import { db } from './firebase.js';
 import {
-  collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy
+  collection, getDocs, setDoc, addDoc, deleteDoc, doc, updateDoc, query, orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 
@@ -35,31 +35,97 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
         break;
 
       case 9:
-        if (groups.length === 0) {
-          chosen = get5(todos);
-          notChosen = getRest(chosen, todos);
-          await addDoc(collection(db, 'groups'), { group1: getNames(chosen), group2: getNames(notChosen) });
-          document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
-          document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
-        } else {
-          const group = groups[0];
-          await resetGroups(groups);
+        const pairsSnap = await getDocs(collection(db, 'pairs'));
+        const pairsData = {};
+        pairsSnap.docs.forEach(d => {
+          pairsData[d.id] = d.data().count || 0;
+        });
 
-          chosen = getPlayers(todos, group.group1);
-          notChosen = getPlayers(todos, group.group2);
-
-          const theChosenOne = get1(chosen);
-          notChosen.push(theChosenOne);
-          chosen.splice(chosen.indexOf(theChosenOne), 1);
-
-          document.getElementById('chosen').textContent = 'Table 1: ' + getNames(chosen).join(', ');
-          document.getElementById('notChosen').textContent = 'Table 2: ' + getNames(notChosen).join(', ');
-
-          await sleep(200);
-          await addDoc(collection(db, 'groups'), { group1: getNames(notChosen), group2: getNames(chosen) });
+        function getPairKey(a, b) {
+          return [a, b].sort().join('|');
         }
 
-        for (const name of getNames(chosen)) {
+        function getPairingScore(playerName, groupNames) {
+          // Sum of times this player has been paired with each member of the group
+          return groupNames.reduce((sum, name) => {
+            return sum + (pairsData[getPairKey(playerName, name)] || 0);
+          }, 0);
+        }
+
+        async function recordPairings(groupNames) {
+          for (let i = 0; i < groupNames.length; i++) {
+            for (let j = i + 1; j < groupNames.length; j++) {
+              const key = getPairKey(groupNames[i], groupNames[j]);
+              const existing = pairsSnap.docs.find(d => d.id === key);
+              if (existing) {
+                await updateDoc(doc(db, 'pairs', key), { count: (pairsData[key] || 0) + 1 });
+              } else {
+                await setDoc(doc(db, 'pairs', key), { count: 1 });
+              }
+            }
+          }
+        }
+
+        if (groups.length === 0) {
+          // First round: pick group of 5 fairly, rest are group of 4
+          chosen = get5(todos);
+          notChosen = getRest(chosen, todos);
+
+          await addDoc(collection(db, 'groups'), {
+            group5: getNames(chosen),
+            group4: getNames(notChosen)
+          });
+
+          await recordPairings(getNames(chosen));
+          await recordPairings(getNames(notChosen));
+
+          document.getElementById('chosen').textContent = 'Table 1 (5): ' + getNames(chosen).join(', ');
+          document.getElementById('notChosen').textContent = 'Table 2 (4): ' + getNames(notChosen).join(', ');
+
+        } else {
+          const group = groups[0];
+          const prevGroup5 = getPlayers(todos, group.group5); // 5 players
+          const prevGroup4 = getPlayers(todos, group.group4); // 4 players
+
+          // All 4 from group4 must go into the new group of 5
+          // Pick 1 from prevGroup5 to join them (minimize pairings)
+          const prevGroup4Names = getNames(prevGroup4);
+
+          let bestPlayer = null;
+          let bestScore = Infinity;
+
+          for (const player of prevGroup5) {
+            const score = getPairingScore(player.name, prevGroup4Names);
+            if (score < bestScore) {
+              bestScore = score;
+              bestPlayer = player;
+            }
+          }
+
+          // New group of 5: all of prevGroup4 + bestPlayer
+          const newGroup5 = [...prevGroup4, bestPlayer];
+          // New group of 4: remaining 4 from prevGroup5
+          const newGroup4 = prevGroup5.filter(p => p !== bestPlayer);
+
+          await resetGroups(groups);
+          await addDoc(collection(db, 'groups'), {
+            group5: getNames(newGroup5),
+            group4: getNames(newGroup4)
+          });
+
+          await recordPairings(getNames(newGroup5));
+          await recordPairings(getNames(newGroup4));
+
+          document.getElementById('chosen').textContent = 'Table 1 (5): ' + getNames(newGroup5).join(', ');
+          document.getElementById('notChosen').textContent = 'Table 2 (4): ' + getNames(newGroup4).join(', ');
+
+          chosen = newGroup5;
+        }
+
+        // Update roundOf4 for the group of 4
+        const group4Players = document.getElementById('notChosen').textContent
+          .replace('Table 2 (4): ', '').split(', ');
+        for (const name of group4Players) {
           const playerDoc = scoresSnap.docs.find(d => d.data().name === name);
           if (playerDoc) {
             const current = playerDoc.data().roundOf4 || 0;
@@ -69,7 +135,10 @@ document.getElementById('shuffleBtn').addEventListener('click', async () => {
 
         min = todos[0].parties || 0;
         todos.forEach(todo => { if (todo.parties < min) min = todo.parties; });
-        if (min === 8) await resetGroups(groups);
+        if (min === 8) {
+          await resetGroups(groups);
+          // Optionally reset pairs too
+        }
         break;
 
       case 10:
